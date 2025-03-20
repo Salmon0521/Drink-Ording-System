@@ -70,7 +70,7 @@ INSERT INTO product (ProductID, ProductName, Price, Size, Sugar, Ice, Type) VALU
 (69, '肯亞AA', 90, 'L', '半糖', '少冰', 'Boutique hand coffee'),
 (70, '肯亞AA', 90, 'L', '正常', '去冰', 'Boutique hand coffee'),
 (71, '肯亞AA', 90, 'L', '無糖', '去冰', 'Boutique hand coffee'),
-(72, '肯亞AA', 90, 'L', '半糖', '去冰', 'Boutique hand coffee');
+(72, '肯亞AA', 90, 'L', '半糖', '去冰', 'Boutique hand coffee'),
 (73, '黃金曼特寧', 70, 'M', '正常', '熱', 'Boutique hand coffee'),
 (74, '黃金曼特寧', 70, 'M', '無糖', '熱', 'Boutique hand coffee'),
 (75, '黃金曼特寧', 70, 'M', '半糖', '熱', 'Boutique hand coffee'),
@@ -526,7 +526,7 @@ INSERT INTO product (ProductID, ProductName, Price, Size, Sugar, Ice, Type) VALU
 (525, '貝里斯牛奶', 75, 'L', '半糖', '少冰', 'Milk'),
 (526, '貝里斯牛奶', 75, 'L', '正常', '去冰', 'Milk'),
 (527, '貝里斯牛奶', 75, 'L', '無糖', '去冰', 'Milk'),
-(528, '貝里斯牛奶', 75, 'L', '半糖', '去冰', 'Milk');
+(528, '貝里斯牛奶', 75, 'L', '半糖', '去冰', 'Milk'),
 (529, '黑咖啡', 40, 'M', '正常', '熱', 'Coffee'),
 (530, '黑咖啡', 40, 'M', '無糖', '熱', 'Coffee'),
 (531, '黑咖啡', 40, 'M', '半糖', '熱', 'Coffee'),
@@ -622,7 +622,7 @@ INSERT INTO product (ProductID, ProductName, Price, Size, Sugar, Ice, Type) VALU
 (621, '卡布奇諾', 85, 'L', '半糖', '少冰', 'Coffee'),
 (622, '卡布奇諾', 85, 'L', '正常', '去冰', 'Coffee'),
 (623, '卡布奇諾', 85, 'L', '無糖', '去冰', 'Coffee'),
-(624, '卡布奇諾', 85, 'L', '半糖', '去冰', 'Coffee');
+(624, '卡布奇諾', 85, 'L', '半糖', '去冰', 'Coffee'),
 (625, '拿鐵咖啡', 65, 'M', '正常', '熱', 'Coffee'),
 (626, '拿鐵咖啡', 65, 'M', '無糖', '熱', 'Coffee'),
 (627, '拿鐵咖啡', 65, 'M', '半糖', '熱', 'Coffee'),
@@ -718,7 +718,7 @@ INSERT INTO product (ProductID, ProductName, Price, Size, Sugar, Ice, Type) VALU
 (717, '榛果拿鐵', 95, 'L', '半糖', '少冰', 'Latte'),
 (718, '榛果拿鐵', 95, 'L', '正常', '去冰', 'Latte'),
 (719, '榛果拿鐵', 95, 'L', '無糖', '去冰', 'Latte'),
-(720, '榛果拿鐵', 95, 'L', '半糖', '去冰', 'Latte');
+(720, '榛果拿鐵', 95, 'L', '半糖', '去冰', 'Latte'),
 (721, '香草拿鐵', 75, 'M', '正常', '熱', 'Latte'),
 (722, '香草拿鐵', 75, 'M', '無糖', '熱', 'Latte'),
 (723, '香草拿鐵', 75, 'M', '半糖', '熱', 'Latte'),
