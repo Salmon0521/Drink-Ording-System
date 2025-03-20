@@ -6,15 +6,15 @@ import java.sql.SQLException;
 
 public class DBConnectionImpl implements DBConnection{
 
-    private static final String URL = "jdbc:sqlserver:/<ip:port>;"+"databaseName=<databaseName>;" +"encrypt=true;trustServerCertificate=true";
-    private static final String user="user";
-    private static final String password="password";
+    private static final String URL = "jdbc:mysql://localhost:3306"+"/drink_ording_sys";
+    private static final String user="root";
+    private static final String password="admin";
 
     @Override
     public Connection getConnection() {
         Connection conn = null;
         try {
-            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+            Class.forName("com.mysql.cj.jdbc.Driver");
             conn= DriverManager.getConnection(URL, user, password);
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
