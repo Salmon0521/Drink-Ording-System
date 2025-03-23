@@ -1,4 +1,4 @@
-package service.cartService;
+package service.cart;
 
 import dao.product.ProductDAO;
 import org.junit.Before;

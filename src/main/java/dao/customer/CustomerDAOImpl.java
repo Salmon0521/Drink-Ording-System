@@ -1,8 +1,8 @@
 package dao.customer;
 
 
-import DBConnection.DBConnection;
-import DBConnection.DBConnectionImpl;
+import db_driver.DBConnection;
+import db_driver.DBConnectionImpl;
 import bean.customer.Customer;
 
 import java.sql.Connection;
@@ -118,13 +118,13 @@ public class CustomerDAOImpl implements CustomerDAO{
     }
 
     @Override
-    public  void updateLevel(int ID, String levels){
+    public  void updateLevel(int id, String levels){
         Connection connection = dbConnection.getConnection();
 
         try (PreparedStatement preparedStatement = connection.prepareStatement(UPDATE_LEVEL))
         {
             preparedStatement.setString(1,levels);
-            preparedStatement.setInt(2,ID);
+            preparedStatement.setInt(2, id);
 
             preparedStatement.executeUpdate();
             connection.close();

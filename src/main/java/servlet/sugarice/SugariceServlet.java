@@ -1,8 +1,8 @@
 package servlet.sugarice;
 
 import bean.product.Product;
-import service.cartService.CartService;
-import service.cartService.CartServiceImpl;
+import service.cart.CartService;
+import service.cart.CartServiceImpl;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;

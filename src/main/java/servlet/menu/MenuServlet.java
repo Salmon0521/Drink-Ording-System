@@ -1,11 +1,11 @@
 package servlet.menu;
 
-import service.cartService.CartService;
-import service.cartService.CartServiceImpl;
-import service.customerService.CustomerService;
-import service.customerService.CustomerServiceImpl;
-import service.ordersService.OrdersService;
-import service.ordersService.OrdersServiceImpl;
+import service.cart.CartService;
+import service.cart.CartServiceImpl;
+import service.customer.CustomerService;
+import service.customer.CustomerServiceImpl;
+import service.orders.OrdersService;
+import service.orders.OrdersServiceImpl;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;

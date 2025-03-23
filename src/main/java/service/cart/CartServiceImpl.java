@@ -1,4 +1,4 @@
-package service.cartService;
+package service.cart;
 
 import bean.product.Product;
 import com.google.gson.Gson;
@@ -25,7 +25,7 @@ public class CartServiceImpl implements CartService{
         Integer productID = productDAO.getProductID(product);
         Integer customerID = customerDAO.getCustomerID(account);
         Integer orderID = buildDAO.getOrderID(customerID, 1).get(0);
-        Integer currentQuantity = cartDAO.ProductExist(orderID, productID);
+        Integer currentQuantity = cartDAO.productExist(orderID, productID);
         if (currentQuantity != null) {
             cartDAO.updateQuantity(orderID, productID, product.getQuantity() + currentQuantity);
         } else{

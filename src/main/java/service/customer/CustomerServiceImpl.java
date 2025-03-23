@@ -1,4 +1,4 @@
-package service.customerService;
+package service.customer;
 
 import bean.customer.Customer;
 import dao.build.BuildDAO;

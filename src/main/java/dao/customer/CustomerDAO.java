@@ -7,6 +7,6 @@ public interface CustomerDAO {
     public String getAccount(Customer customer);
     public Customer getLevel(int customerID);
     public void insert(Customer customer);
-    public void updateLevel(int ID, String levels);
+    public void updateLevel(int id, String levels);
     public Integer getCustomerID(String account);
 }

@@ -1,7 +1,7 @@
 package dao.build;
 
-import DBConnection.DBConnection;
-import DBConnection.DBConnectionImpl;
+import db_driver.DBConnection;
+import db_driver.DBConnectionImpl;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -16,7 +16,7 @@ public class BuildDAOImpl implements BuildDAO {
     private static final String INSERT_BUILD = "INSERT INTO build(orderID, customerID) VALUES (?,?)";
     public List<Integer> getOrderID(int customerID, int status){
         Connection connection = dbConnection.getConnection();
-        List<Integer> OrderIDList = new ArrayList<>();
+        List<Integer> orderIDList = new ArrayList<>();
         Integer orderID = null;
 
         try (PreparedStatement preparedStatement = connection.prepareStatement(GET_ORDERID)){
@@ -27,7 +27,7 @@ public class BuildDAOImpl implements BuildDAO {
                 while (resultSet.next()) {
                     orderID = resultSet.getInt("orderID");
 
-                    OrderIDList.add(orderID);
+                    orderIDList.add(orderID);
                 }
             }
             connection.close();
@@ -35,7 +35,7 @@ public class BuildDAOImpl implements BuildDAO {
             e.printStackTrace();
         }
 
-        return OrderIDList;
+        return orderIDList;
     }
 
     public void insert(int customerID, int orderID){

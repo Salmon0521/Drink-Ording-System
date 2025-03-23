@@ -12,7 +12,7 @@ public interface ProductDAO {
     public List<Product> getTea();
     public List<Product> getChocolate();
     public List<Product> getCoffee();
-    public Product getAddInfo(int ProductID);
+    public Product getAddInfo(int productID);
     public Integer getProductID(Product product);
     public List<Product> getType();
 }

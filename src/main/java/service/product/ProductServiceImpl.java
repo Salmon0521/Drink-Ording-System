@@ -1,4 +1,4 @@
-package service.productService;
+package service.product;
 
 import bean.product.Product;
 import dao.product.ProductDAO;

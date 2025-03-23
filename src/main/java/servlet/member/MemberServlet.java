@@ -1,7 +1,7 @@
 package servlet.member;
 
-import service.ordersService.OrdersService;
-import service.ordersService.OrdersServiceImpl;
+import service.orders.OrdersService;
+import service.orders.OrdersServiceImpl;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;

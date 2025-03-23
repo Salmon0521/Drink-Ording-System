@@ -1,4 +1,4 @@
-package service.ordersService;
+package service.orders;
 
 import bean.orders.Orders;
 import bean.product.Product;

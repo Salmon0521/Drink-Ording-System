@@ -1,7 +1,7 @@
 package dao.product;
 
-import DBConnection.DBConnection;
-import DBConnection.DBConnectionImpl;
+import db_driver.DBConnection;
+import db_driver.DBConnectionImpl;
 import bean.product.Product;
 
 import java.sql.Connection;
@@ -68,12 +68,12 @@ public class ProductDAOImpl implements ProductDAO{
         return getProductsByType("Coffee");
     }
     @Override
-    public Product getAddInfo(int ProductID) {
+    public Product getAddInfo(int productID) {
         Connection connection = dbConnection.getConnection();
-        List<Product> MilkList = new ArrayList<>();
+        List<Product> milkList = new ArrayList<>();
         try (PreparedStatement preparedStatement = connection.prepareStatement(GET_ADD_INFO))
         {
-            preparedStatement.setInt(1, ProductID);
+            preparedStatement.setInt(1, productID);
 
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
 

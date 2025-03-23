@@ -1,7 +1,7 @@
 package servlet.login;
 
-import service.customerService.CustomerService;
-import service.customerService.CustomerServiceImpl;
+import service.customer.CustomerService;
+import service.customer.CustomerServiceImpl;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;

@@ -1,8 +1,8 @@
 package servlet.register;
 
 import bean.customer.Customer;
-import service.customerService.CustomerService;
-import service.customerService.CustomerServiceImpl;
+import service.customer.CustomerService;
+import service.customer.CustomerServiceImpl;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -25,14 +25,14 @@ public class RegisterServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String r_account = request.getParameter("R_Account");
-        String r_password = request.getParameter("R_Password");
-        String r_tel = request.getParameter("R_Tel");
+        String registeredAccount = request.getParameter("R_Account");
+        String registeredpassword = request.getParameter("R_Password");
+        String registeredPhone = request.getParameter("R_Tel");
 
         Customer customer = new Customer();
-        customer.setAccount(r_account);
-        customer.setPassword(r_password);
-        customer.setPhone(r_tel);
+        customer.setAccount(registeredAccount);
+        customer.setPassword(registeredpassword);
+        customer.setPhone(registeredPhone);
         CustomerService customerService = new CustomerServiceImpl();
 
         if (customerService.register(customer)){

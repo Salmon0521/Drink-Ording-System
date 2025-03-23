@@ -8,6 +8,6 @@ public interface CartDAO {
     public void insert(int orderID, int productID, int quantity);
     public void deleteProduct(int orderID, int productID);
     public List<Product> getProduct(int orderID);
-    public Integer ProductExist(int orderID, int productID);
-    public void updateQuantity(int orderID, int productID, int Quantity);
+    public Integer productExist(int orderID, int productID);
+    public void updateQuantity(int orderID, int productID, int quantity);
 }

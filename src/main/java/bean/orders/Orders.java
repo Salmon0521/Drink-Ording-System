@@ -2,7 +2,7 @@ package bean.orders;
 
 public class Orders {
     private Integer orderID;
-    private  Integer CustomerID;
+    private  Integer customerID;
     private Integer productID;
     private String dates;
     private Integer amount;
@@ -21,9 +21,9 @@ public class Orders {
         this.orderID = orderID;
     }
 
-    public Integer getCustomerID() { return CustomerID; }
+    public Integer getCustomerID() { return customerID; }
 
-    public void setCustomerID(Integer customerID) { CustomerID = customerID; }
+    public void setCustomerID(Integer customerID) { this.customerID = customerID; }
 
     public Integer getProductID() {
         return productID;

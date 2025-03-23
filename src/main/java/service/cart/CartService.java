@@ -1,4 +1,4 @@
-package service.cartService;
+package service.cart;
 
 import bean.product.Product;
 

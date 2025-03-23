@@ -1,7 +1,7 @@
 package dao.cart;
 
-import DBConnection.DBConnection;
-import DBConnection.DBConnectionImpl;
+import db_driver.DBConnection;
+import db_driver.DBConnectionImpl;
 import bean.product.Product;
 
 import java.sql.Connection;
@@ -83,7 +83,7 @@ public class CartDAOImpl implements CartDAO{
     }
 
     @Override
-    public Integer ProductExist(int orderID, int productID){
+    public Integer productExist(int orderID, int productID){
         Connection connection = dbConnection.getConnection();
         Integer quantity = null;
 
@@ -105,12 +105,12 @@ public class CartDAOImpl implements CartDAO{
     }
 
     @Override
-    public void updateQuantity(int orderID, int productID, int Quantity){
+    public void updateQuantity(int orderID, int productID, int quantity){
         Connection connection = dbConnection.getConnection();
 
         try (PreparedStatement preparedStatement = connection.prepareStatement(UPDATE_QUANTITY)){
 
-            preparedStatement.setInt(1, Quantity);
+            preparedStatement.setInt(1, quantity);
             preparedStatement.setInt(2, orderID);
             preparedStatement.setInt(3, productID);
 

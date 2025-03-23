@@ -1,7 +1,7 @@
 package dao.orders;
 
-import DBConnection.DBConnection;
-import DBConnection.DBConnectionImpl;
+import db_driver.DBConnection;
+import db_driver.DBConnectionImpl;
 import bean.orders.Orders;
 import bean.product.Product;
 
@@ -117,11 +117,11 @@ public class OrdersDAOImpl implements OrdersDAO {
         return orderID;
     }
 
-    public void insert(int CustomerID, int productID, String dates, int amount, int quantity){
+    public void insert(int customerID, int productID, String dates, int amount, int quantity){
         Connection connection = dbConnection.getConnection();
 
         try (PreparedStatement preparedStatement = connection.prepareStatement(INSERT_ORDER)){
-            preparedStatement.setInt(1,CustomerID);
+            preparedStatement.setInt(1, customerID);
             preparedStatement.setInt(2,productID);
             preparedStatement.setString(3,dates);
             preparedStatement.setInt(4,amount);

@@ -1,4 +1,4 @@
-package service.ordersService;
+package service.orders;
 
 import javax.servlet.http.HttpSession;
 
