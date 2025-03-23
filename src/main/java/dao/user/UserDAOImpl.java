@@ -1,29 +1,28 @@
-package dao.customer;
+package dao.user;
 
 
 import db_driver.DBConnection;
 import db_driver.DBConnectionImpl;
-import bean.customer.Customer;
+import bean.user.User;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class CustomerDAOImpl implements CustomerDAO{
+public class UserDAOImpl implements UserDAO {
 
-    private DBConnection dbConnection = new DBConnectionImpl();
-    private  static  final String GET_LOGIN = "SELECT * FROM customer WHERE account = ? AND password = ?";
-    private  static  final String GET_ACCOUNT = "SELECT account FROM customer WHERE account = ?";
-    private static final String GET_LEVEL = "SELECT * FROM customer WHERE customerid = ?";
-    private static final String INSERT_CUSTOMER = "INSERT INTO customer(account, password, phone) VALUES (?,?,?)";
-    private static final String UPDATE_LEVEL = "UPDATE customer SET level = ? WHERE customerid = ?";
-    private static final String GET_ID = "SELECT customerID FROM customer WHERE account = ?";
-    Customer customer = null;
+    private final DBConnection dbConnection = new DBConnectionImpl();
+    private static final String GET_LOGIN = "SELECT * FROM user WHERE account = ? AND password = ?";
+    private static final String GET_ACCOUNT = "SELECT account FROM user WHERE account = ?";
+    private static final String GET_LEVEL = "SELECT * FROM user WHERE userid = ?";
+    private static final String INSERT_USER = "INSERT INTO user(account, password, phone) VALUES (?,?,?)";
+    private static final String UPDATE_LEVEL = "UPDATE user SET level = ? WHERE userid = ?";
+    private static final String GET_ID = "SELECT user FROM user WHERE account = ?";
 
     @Override
-    public Customer getLogin(String account, String password){
-
+    public User getLogin(String account, String password){
+        User user = null;
         Connection connection = dbConnection.getConnection();
 
         try(PreparedStatement preparedStatement = connection.prepareStatement(GET_LOGIN))
@@ -33,13 +32,11 @@ public class CustomerDAOImpl implements CustomerDAO{
 
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
                 if (resultSet.next()) {
-                    customer = new Customer();
-                    customer.setAccount(resultSet.getString("account"));
-                    customer.setPassword(resultSet.getString("password"));
-                    customer.setLevel(resultSet.getString("level"));
+                    String level = resultSet.getString("level");
+                    user = new User(account, level);
                 }
                 else{
-                    return customer;
+                    return user;
                 }
             }
             connection.close();
@@ -48,18 +45,18 @@ public class CustomerDAOImpl implements CustomerDAO{
         {
             e.printStackTrace();
         }
-        return customer;
+        return user;
     }
 
     @Override
-    public String getAccount(Customer customer){
+    public String getAccount(User user){
 
-        Connection connection = dbConnection.getConnection();
         String account = null;
+        Connection connection = dbConnection.getConnection();
 
         try(PreparedStatement preparedStatement = connection.prepareStatement(GET_ACCOUNT))
         {
-            preparedStatement.setString(1, customer.getAccount());
+            preparedStatement.setString(1, user.getAccount());
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
                 while(resultSet.next()) {
                     account = resultSet.getString("account");
@@ -74,41 +71,41 @@ public class CustomerDAOImpl implements CustomerDAO{
     }
 
     @Override
-    public Customer getLevel(int customerID){
+    public String getLevel(int userID){
 
+        String level = null;
         Connection connection = dbConnection.getConnection();
 
         try (PreparedStatement preparedStatement = connection.prepareStatement(GET_LEVEL))
         {
-            preparedStatement.setInt(1,customerID);
-            customer = null;
+            preparedStatement.setInt(1, userID);
 
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
                 if(resultSet.next()){
-                    customer.setLevel(resultSet.getString("level"));
+                    level = resultSet.getString("level");
+
                 }
                 else{
-                    return customer;
+                    return level;
                 }
             }
             connection.close();
         }catch (SQLException e) {
-
-
             e.printStackTrace();
         }
-        return customer;
+
+        return level;
     }
 
     @Override
-    public void insert(Customer customer){
+    public void register(User user){
         Connection connection = dbConnection.getConnection();
 
-        try (PreparedStatement preparedStatement = connection.prepareStatement(INSERT_CUSTOMER))
+        try (PreparedStatement preparedStatement = connection.prepareStatement(INSERT_USER))
         {
-            preparedStatement.setString(1,customer.getAccount());
-            preparedStatement.setString(2,customer.getPassword());
-            preparedStatement.setString(3,customer.getPhone());
+            preparedStatement.setString(1, user.getAccount());
+            preparedStatement.setString(2, user.getPassword());
+            preparedStatement.setString(3, user.getPhone());
 
             preparedStatement.executeUpdate();
             connection.close();

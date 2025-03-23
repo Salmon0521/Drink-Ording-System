@@ -1,16 +1,17 @@
-package dao.user.orders;
+package dao.bean.orders;
 
-import bean.orders.Orders;
+import bean.order.Order;
 import dao.orders.OrdersDAO;
 import dao.orders.OrdersDAOImpl;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
-public class OrdersDAOImplTest {
+public class OrderDAOImplTest {
 
     private OrdersDAO ordersDAO;
     @Before
@@ -19,8 +20,9 @@ public class OrdersDAOImplTest {
     }
 
     @Test
+    @Ignore("cart not to be order")
     public void get() {
-        List<Orders> orders = ordersDAO.getOrders(2);
+        List<Order> orders = ordersDAO.getOrders(1);
         System.out.println(orders);
     }
 

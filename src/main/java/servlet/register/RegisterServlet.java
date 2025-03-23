@@ -1,6 +1,6 @@
 package servlet.register;
 
-import bean.customer.Customer;
+import bean.user.User;
 import service.customer.CustomerService;
 import service.customer.CustomerServiceImpl;
 
@@ -29,13 +29,10 @@ public class RegisterServlet extends HttpServlet {
         String registeredpassword = request.getParameter("R_Password");
         String registeredPhone = request.getParameter("R_Tel");
 
-        Customer customer = new Customer();
-        customer.setAccount(registeredAccount);
-        customer.setPassword(registeredpassword);
-        customer.setPhone(registeredPhone);
+        User user = new User(registeredAccount, registeredpassword, registeredPhone);
         CustomerService customerService = new CustomerServiceImpl();
 
-        if (customerService.register(customer)){
+        if (customerService.register(user)){
             response.getWriter().print("0");
         }
         else {

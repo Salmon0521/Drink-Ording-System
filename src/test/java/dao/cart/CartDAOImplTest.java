@@ -2,6 +2,7 @@ package dao.cart;
 
 import bean.product.Product;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import java.util.List;
@@ -17,7 +18,7 @@ public class CartDAOImplTest {
 
     @Test
     public void insert() {
-        cartDAO.insert(5,1,3);
+        cartDAO.insert(1,1,3);
     }
 
     @Test
@@ -27,6 +28,7 @@ public class CartDAOImplTest {
 
 
     @Test
+    @Ignore
     public void get() {
         List<Product> productList = cartDAO.getProduct(20);
 

@@ -1,18 +1,21 @@
-package dao.user.product;
+package dao.bean.product;
 
 import bean.product.Product;
 import dao.product.ProductDAO;
 import dao.product.ProductDAOImpl;
 import org.junit.Before;
 import org.junit.Test;
+import util.DatabaseUtil;
 
 import java.util.List;
 
 public class ProductDAOImplTest {
     private ProductDAO productDAO;
+
     @Before
     public void setUp() throws Exception {
         productDAO = new ProductDAOImpl();
+        DatabaseUtil.initDatabase();
     }
 
     @Test

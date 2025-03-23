@@ -1,14 +1,25 @@
-package bean.customer;
+package bean.user;
 
-public class Customer {
+public class User {
     private Integer id;
     private String account;
     private String password;
-    private String level = "普通會員";
+    private String level;
     private String phone;
 
-    public Customer(){
+    public User(String account, String level) {
+        this.account = account;
+        this.level = level;
+    }
 
+    public User(String account, String password, String phone) {
+        this.account = account;
+        this.password = password;
+        this.phone = phone;
+    }
+
+    public User(String level) {
+        this.level = level;
     }
 
     public Integer getId() {

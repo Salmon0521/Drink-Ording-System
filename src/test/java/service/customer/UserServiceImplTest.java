@@ -1,10 +1,10 @@
 package service.customer;
 
-import bean.customer.Customer;
+import bean.user.User;
 import org.junit.Before;
 import org.junit.Test;
 
-public class CustomerServiceImplTest {
+public class UserServiceImplTest {
     private CustomerService customerService;
 
     @Before
@@ -20,11 +20,8 @@ public class CustomerServiceImplTest {
 
     @Test
     public void register() {
-        Customer customer = new Customer();
-        customer.setAccount("123");
-        customer.setPassword("1212");
-        customer.setPhone("0912345678");
-        Boolean registertmp = customerService.register(customer);
+        User user = new User("test", "123456", "0912345678");
+        Boolean registertmp = customerService.register(user);
         System.out.print(registertmp);
     }
 }

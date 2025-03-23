@@ -1,7 +1,6 @@
-package bean.orders;
+package bean.order;
 
-public class Orders {
-    private Integer orderID;
+public class Order {
     private  Integer customerID;
     private Integer productID;
     private String dates;
@@ -9,16 +8,8 @@ public class Orders {
     private Integer quantity;
     private Integer status;
 
-    public Orders() {
-
-    }
-
-    public Integer getOrderID() {
-        return orderID;
-    }
-
-    public void setOrderID(Integer orderID) {
-        this.orderID = orderID;
+    public Order(String dates) {
+        this.dates = dates;
     }
 
     public Integer getCustomerID() { return customerID; }
@@ -34,8 +25,6 @@ public class Orders {
     }
 
     public String getDates() { return dates; }
-
-    public void setDates(String dates) { this.dates = dates; }
 
     public Integer getAmount() {
         return amount;

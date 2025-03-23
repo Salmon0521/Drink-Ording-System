@@ -1,11 +1,11 @@
 package service.customer;
 
-import bean.customer.Customer;
+import bean.user.User;
 
 import javax.servlet.http.HttpSession;
 
 public interface CustomerService {
     public Boolean customerLogin(HttpSession session, String account, String password);
-    public Boolean register(Customer customer);
+    public Boolean register(User user);
     public void updateLevel(HttpSession session, String account);
 }

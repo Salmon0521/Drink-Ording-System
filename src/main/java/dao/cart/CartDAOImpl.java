@@ -61,16 +61,15 @@ public class CartDAOImpl implements CartDAO{
             preparedStatement.setInt(1, orderID);
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
                 while (resultSet.next()) {
-                    Product product = new Product();
-                    product.setId(resultSet.getInt("ProductID"));
-                    product.setName(resultSet.getString("ProductName"));
-                    product.setIce(resultSet.getString("ice"));
-                    product.setSize(resultSet.getString("size"));
-                    product.setSugar(resultSet.getString("sugar"));
+                    Integer productID = resultSet.getInt("ProductID");
+                    String productName = resultSet.getString("ProductName");
+                    String ice = resultSet.getString("ice");
+                    String size = resultSet.getString("size");
+                    String sugar = resultSet.getString("sugar");
                     Integer quantity = resultSet.getInt("quantity");
-                    product.setPrice(resultSet.getInt("price") * quantity);
-                    product.setQuantity(quantity);
+                    Integer price = resultSet.getInt("price") * quantity;
 
+                    Product product = new Product(productID, productName, size, price, ice, sugar, quantity);
                     productList.add(product);
                 }
             }

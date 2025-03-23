@@ -1,6 +1,7 @@
 package dao.build;
 
 import org.junit.Before;
+import util.DatabaseUtil;
 
 public class BuildDAOImplTest {
     private BuildDAO buildDAO;
@@ -8,6 +9,7 @@ public class BuildDAOImplTest {
     @Before
     public void setUp() throws Exception {
         buildDAO = new BuildDAOImpl();
+        DatabaseUtil.initDatabase();
     }
 
 

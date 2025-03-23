@@ -2,7 +2,7 @@ package service.orders;
 
 import org.junit.Before;
 
-public class OrdersServiceImplTest {
+public class OrderServiceImplTest {
     private OrdersService ordersService;
 
     @Before

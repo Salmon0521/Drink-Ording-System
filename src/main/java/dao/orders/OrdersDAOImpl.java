@@ -2,7 +2,7 @@ package dao.orders;
 
 import db_driver.DBConnection;
 import db_driver.DBConnectionImpl;
-import bean.orders.Orders;
+import bean.order.Order;
 import bean.product.Product;
 
 import java.sql.Connection;
@@ -15,42 +15,41 @@ import java.util.List;
 public class OrdersDAOImpl implements OrdersDAO {
 
     private DBConnection dbConnection = new DBConnectionImpl();
-    private static final String GET_ORDER = "SELECT * FROM orders JOIN build ON build.orderID = orders.orderID WHERE CustomerID = ? AND Status = 0 ORDER BY dates ASC";
+    private static final String GET_ORDER = "SELECT * FROM orders JOIN build ON build.orderID = orders.orderID WHERE userID = ? AND Status = 0 ORDER BY dates ASC";
     private static final String INITIAL_ORDER = "INSERT INTO orders(status) VALUES (?)";
     private static final String GET_PRODUCT = "SELECT addCart.Quantity, product.*\n" +
                                               "FROM addCart\n" +
                                               "JOIN product ON addCart.productID = product.ProductID\n" +
                                               "JOIN orders ON addCart.orderID = orders.orderID\n" +
                                               "JOIN build ON build.orderID = orders.OrderID\n" +
-                                              "JOIN customer ON build.CustomerID = customer.CustomerID\n" +
-                                              "WHERE build.CustomerID = ? AND dates = ?;\n";
+                                              "JOIN customer ON build.userID = customer.userID\n" +
+                                              "WHERE build.userID = ? AND dates = ?;\n";
     private static final String GET_MAX_ORDERID = "SELECT MAX(orderID) FROM orders";
-    private static final String INSERT_ORDER = "INSERT INTO orders(customerID, productID, dates, amount, quantity) VALUES (?,?,?,?,?)";
+    private static final String INSERT_ORDER = "INSERT INTO orders(userID, productID, dates, amount, quantity) VALUES (?,?,?,?,?)";
     private static final String UPDATE_ORDER = "UPDATE orders SET dates = ?, amount = ?, status = ? WHERE orderID = ?";
 
     @Override
-    public List<Orders> getOrders(int customerID){
+    public List<Order> getOrders(int userID){
         Connection connection = dbConnection.getConnection();
-        List<Orders> ordersList = new ArrayList<>();
+        List<Order> orderList = new ArrayList<>();
 
         try (PreparedStatement preparedStatement = connection.prepareStatement(GET_ORDER)){
 
-            preparedStatement.setInt(1, customerID);
+            preparedStatement.setInt(1, userID);
 
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
                 resultSet.next();
-                Orders orders = new Orders();
                 String dates = resultSet.getString("dates");
-                orders.setDates(dates);
+                Order order = new Order(dates);
+
                 Integer price = resultSet.getInt("amount");
                 while (resultSet.next()){
                     dates = resultSet.getString("dates");
-                    if (!orders.getDates().equals(dates)){
-                        orders.setAmount(price);
-                        ordersList.add(orders);
+                    if (!order.getDates().equals(dates)){
+                        order.setAmount(price);
+                        orderList.add(order);
                         price = 0;
-                        orders = new Orders();
-                        orders.setDates(dates);
+                        order = new Order(dates);
                         price += resultSet.getInt("amount");
                     }
                     else{
@@ -58,23 +57,23 @@ public class OrdersDAOImpl implements OrdersDAO {
                     }
                 }
                 connection.close();
-                orders.setAmount(price);
-                ordersList.add(orders);
-                return ordersList;
+                order.setAmount(price);
+                orderList.add(order);
+                return orderList;
             }
         }catch (SQLException e) {
             e.printStackTrace();
         }
-        return ordersList;
+        return orderList;
     }
 
     @Override
-    public List<Product> getOrdersByDate(int customerID, String date){
+    public List<Product> getOrdersByDate(int userID, String date){
         Connection connection = dbConnection.getConnection();
         List<Product> productList = new ArrayList<>();
 
         try (PreparedStatement preparedStatement = connection.prepareStatement(GET_PRODUCT)){
-            preparedStatement.setInt(1, customerID);
+            preparedStatement.setInt(1, userID);
             preparedStatement.setString(2, date);
 
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
@@ -117,11 +116,11 @@ public class OrdersDAOImpl implements OrdersDAO {
         return orderID;
     }
 
-    public void insert(int customerID, int productID, String dates, int amount, int quantity){
+    public void insert(int userID, int productID, String dates, int amount, int quantity){
         Connection connection = dbConnection.getConnection();
 
         try (PreparedStatement preparedStatement = connection.prepareStatement(INSERT_ORDER)){
-            preparedStatement.setInt(1, customerID);
+            preparedStatement.setInt(1, userID);
             preparedStatement.setInt(2,productID);
             preparedStatement.setString(3,dates);
             preparedStatement.setInt(4,amount);

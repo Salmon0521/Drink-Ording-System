@@ -13,6 +13,16 @@ public class Product {
     public Product() {
     }
 
+    public Product(Integer id, String name, String size, Integer price, String ice, String sugar, Integer quantity) {
+        this.id = id;
+        this.name = name;
+        this.size = size;
+        this.price = price;
+        this.ice = ice;
+        this.sugar = sugar;
+        this.quantity = quantity;
+    }
+
     public Integer getId() {
         return id;
     }

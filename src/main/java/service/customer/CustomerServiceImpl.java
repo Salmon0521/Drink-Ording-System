@@ -1,26 +1,26 @@
 package service.customer;
 
-import bean.customer.Customer;
+import bean.user.User;
 import dao.build.BuildDAO;
 import dao.build.BuildDAOImpl;
-import dao.customer.CustomerDAO;
-import dao.customer.CustomerDAOImpl;
+import dao.user.UserDAO;
+import dao.user.UserDAOImpl;
 import dao.orders.OrdersDAO;
 import dao.orders.OrdersDAOImpl;
 
 import javax.servlet.http.HttpSession;
 
 public class CustomerServiceImpl implements CustomerService{
-    private final CustomerDAO customerDAO = new CustomerDAOImpl();
+    private final UserDAO userDAO = new UserDAOImpl();
     private final BuildDAO buildDAO = new BuildDAOImpl();
     private final OrdersDAO ordersDAO = new OrdersDAOImpl();
 
     @Override
     public Boolean customerLogin(HttpSession session, String account, String password){
-        Customer customer = customerDAO.getLogin(account, password);
-        if(customer != null){
-            session.setAttribute("account", customer.getAccount());
-            session.setAttribute("levels", customer.getLevel());
+        User user = userDAO.getLogin(account, password);
+        if(user != null){
+            session.setAttribute("account", user.getAccount());
+            session.setAttribute("levels", user.getLevel());
             return true;
         }
         else{
@@ -29,12 +29,12 @@ public class CustomerServiceImpl implements CustomerService{
     }
 
     @Override
-    public Boolean register(Customer customer){
-        String account = customerDAO.getAccount(customer);
+    public Boolean register(User user){
+        String account = userDAO.getAccount(user);
         if(account == null){
-            customerDAO.insert(customer);
+            userDAO.register(user);
             Integer orderID = ordersDAO.initial();
-            Integer customerID = customerDAO.getCustomerID(customerDAO.getAccount(customer));
+            Integer customerID = userDAO.getCustomerID(userDAO.getAccount(user));
             buildDAO.insert(customerID, orderID);
             return true;
         }
@@ -43,8 +43,8 @@ public class CustomerServiceImpl implements CustomerService{
 
     @Override
     public void updateLevel(HttpSession session, String account){
-        Integer customerID = customerDAO.getCustomerID(account);
-        customerDAO.updateLevel(customerID, "VIP");
+        Integer customerID = userDAO.getCustomerID(account);
+        userDAO.updateLevel(customerID, "VIP");
         session.setAttribute("level", "VIP");
     }
 }
