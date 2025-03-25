@@ -12,8 +12,8 @@ import java.util.List;
 
 public class BuildDAOImpl implements BuildDAO {
     private final DBConnection dbConnection = new DBConnectionImpl();
-    private static final String GET_ORDERID = "SELECT build.OrderID FROM BUILD JOIN orders ON orders.OrderID = build.OrderID WHERE CUSTOMERID = ? and STATUS = ?";
-    private static final String INSERT_BUILD = "INSERT INTO build(orderID, customerID) VALUES (?,?)";
+    private static final String GET_ORDERID = "SELECT build.OrderID FROM BUILD JOIN orders ON orders.OrderID = build.OrderID WHERE userID = ? and STATUS = ?";
+    private static final String INSERT_BUILD = "INSERT INTO build(orderID, userID) VALUES (?,?)";
     public List<Integer> getOrderID(int customerID, int status){
         Connection connection = dbConnection.getConnection();
         List<Integer> orderIDList = new ArrayList<>();
@@ -38,14 +38,12 @@ public class BuildDAOImpl implements BuildDAO {
         return orderIDList;
     }
 
-    public void insert(int customerID, int orderID){
+    public void insert(int userID, int orderID){
         Connection connection = dbConnection.getConnection();
 
         try (PreparedStatement preparedStatement = connection.prepareStatement(INSERT_BUILD)){
-
             preparedStatement.setInt(1, orderID);
-            preparedStatement.setInt(2, customerID);
-
+            preparedStatement.setInt(2, userID);
             preparedStatement.executeUpdate();
             connection.close();
         }catch (SQLException e) {

@@ -1,6 +1,7 @@
 package servlet.register;
 
 import bean.user.User;
+import org.mindrot.jbcrypt.BCrypt;
 import service.customer.CustomerService;
 import service.customer.CustomerServiceImpl;
 
@@ -26,10 +27,12 @@ public class RegisterServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String registeredAccount = request.getParameter("R_Account");
-        String registeredpassword = request.getParameter("R_Password");
+        String registeredPassword = request.getParameter("R_Password");
         String registeredPhone = request.getParameter("R_Tel");
 
-        User user = new User(registeredAccount, registeredpassword, registeredPhone);
+        String hashRegisteredPassword = BCrypt.hashpw(registeredPassword, BCrypt.gensalt(10));
+
+        User user = new User(registeredAccount, hashRegisteredPassword, registeredPhone);
         CustomerService customerService = new CustomerServiceImpl();
 
         if (customerService.register(user)){

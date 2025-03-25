@@ -21,16 +21,11 @@ public class UserDAOImplTest {
     }
 
     @Test
-    public void register() {
+    public void test_registerUser() {
+        assertEquals(Boolean.FALSE, userDAO.checkRegistration("test", "0912345678"));
         User user = new User("test", "123456", "0912345678");
         userDAO.register(user);
-        assertEquals("test", userDAO.getAccount(user));
-    }
-
-    @Test
-    public void getAccount() {
-        User user = new User("test", "test");
-        assertEquals("test", userDAO.getAccount(user));
+        assertEquals(Boolean.TRUE, userDAO.checkRegistration("test", "0912345678"));
     }
 
     @Test

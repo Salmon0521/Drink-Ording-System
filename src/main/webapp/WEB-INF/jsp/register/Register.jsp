@@ -37,13 +37,20 @@
             </div>
             <br/>
             <div style="text-align:center;">
-                <button type="button" style="padding: 15px 50px;background-color: #008CBA;" onclick="register()" value="Sign_up" >立即註冊</button>
+                            <button type="button" onclick="register()" value="Sign_up"
+                                    style="text-align:center;
+                                            padding: 15px 100px;
+                                            background-color: #3f4344;
+                                            border-radius: 10px;
+                                            color: #ffffff;
+                                            font-size: 15px;
+                                            border: 1px solid #847d7d;
+                                            cursor: pointer;" >立即註冊</button>
             </div>
         </form>
         <div class="signup"></div>
     </div>
 </div>
-
 
 </body>
 </html>

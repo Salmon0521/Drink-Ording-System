@@ -14,10 +14,10 @@ public class UserDAOImpl implements UserDAO {
 
     private final DBConnection dbConnection = new DBConnectionImpl();
     private static final String GET_LOGIN = "SELECT * FROM user WHERE account = ? AND password = ?";
-    private static final String GET_ACCOUNT = "SELECT account FROM user WHERE account = ?";
+    private static final String GET_USERID = "SELECT userID FROM user WHERE account = ? AND phone = ?";
     private static final String GET_LEVEL = "SELECT * FROM user WHERE userid = ?";
     private static final String INSERT_USER = "INSERT INTO user(account, password, phone) VALUES (?,?,?)";
-    private static final String UPDATE_LEVEL = "UPDATE user SET level = ? WHERE userid = ?";
+    private static final String UPDATE_LEVEL = "UPDATE user SET level = ? WHERE userID = ?";
     private static final String GET_ID = "SELECT user FROM user WHERE account = ?";
 
     @Override
@@ -49,25 +49,52 @@ public class UserDAOImpl implements UserDAO {
     }
 
     @Override
-    public String getAccount(User user){
-
-        String account = null;
+    public Boolean checkRegistration(String account, String phone) {
+        Integer userID = null;
         Connection connection = dbConnection.getConnection();
 
-        try(PreparedStatement preparedStatement = connection.prepareStatement(GET_ACCOUNT))
+        try(PreparedStatement preparedStatement = connection.prepareStatement(GET_USERID))
         {
-            preparedStatement.setString(1, user.getAccount());
+            preparedStatement.setString(1, account);
+            preparedStatement.setString(2, phone);
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
-                while(resultSet.next()) {
-                    account = resultSet.getString("account");
+                if (resultSet.next()) {
+                    userID = resultSet.getInt("userID");
                 }
             }
+
             connection.close();
-        }catch (SQLException e) {
+            if (userID == null) {
+                return false;
+            }
+        } catch (SQLException e) {
             e.printStackTrace();
         }
 
-        return account;
+        return true;
+    }
+
+    @Override
+    public Integer getUserID(String account, String phone) {
+        Integer userID = null;
+        Connection connection = dbConnection.getConnection();
+
+        try(PreparedStatement preparedStatement = connection.prepareStatement(GET_USERID))
+        {
+            preparedStatement.setString(1, account);
+            preparedStatement.setString(2, phone);
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                if (resultSet.next()) {
+                    userID = resultSet.getInt("userID");
+                }
+            }
+
+            connection.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return userID;
     }
 
     @Override
