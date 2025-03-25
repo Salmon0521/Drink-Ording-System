@@ -17,13 +17,15 @@ public class OrdersDAOImpl implements OrdersDAO {
     private DBConnection dbConnection = new DBConnectionImpl();
     private static final String GET_ORDER = "SELECT * FROM orders JOIN build ON build.orderID = orders.orderID WHERE userID = ? AND Status = 0 ORDER BY dates ASC";
     private static final String INITIAL_ORDER = "INSERT INTO orders(status) VALUES (?)";
-    private static final String GET_PRODUCT = "SELECT addCart.Quantity, product.*\n" +
-                                              "FROM addCart\n" +
-                                              "JOIN product ON addCart.productID = product.ProductID\n" +
-                                              "JOIN orders ON addCart.orderID = orders.orderID\n" +
-                                              "JOIN build ON build.orderID = orders.OrderID\n" +
-                                              "JOIN customer ON build.userID = customer.userID\n" +
-                                              "WHERE build.userID = ? AND dates = ?;\n";
+    private static final String GET_PRODUCT = """
+                                                SELECT addCart.Quantity, product.*
+                                                FROM addCart
+                                                JOIN product ON addCart.productID = product.ProductID
+                                                JOIN orders ON addCart.orderID = orders.orderID
+                                                JOIN build ON build.orderID = orders.OrderID
+                                                JOIN user ON build.userID = user.userID
+                                                WHERE build.userID = ? AND dates = ?;
+                                                """;
     private static final String GET_MAX_ORDERID = "SELECT MAX(orderID) FROM orders";
     private static final String INSERT_ORDER = "INSERT INTO orders(userID, productID, dates, amount, quantity) VALUES (?,?,?,?,?)";
     private static final String UPDATE_ORDER = "UPDATE orders SET dates = ?, amount = ?, status = ? WHERE orderID = ?";

@@ -30,7 +30,7 @@ public class CustomerServiceImpl implements CustomerService{
 
     @Override
     public Boolean register(User user){
-        if(!userDAO.checkRegistration(user.getAccount(), user.getPhone())){
+        if(Boolean.FALSE.equals(userDAO.checkRegistration(user.getAccount(), user.getPhone()))){
             userDAO.register(user);
             Integer orderID = ordersDAO.initial();
             Integer userID = userDAO.getUserID(user.getAccount(), user.getPhone());

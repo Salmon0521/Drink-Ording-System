@@ -8,24 +8,24 @@ import org.junit.Ignore;
 import org.junit.Test;
 import util.DatabaseUtil;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
 
 public class UserDAOImplTest {
 
     private UserDAO userDAO;
 
     @Before
-    public void setUp() throws Exception {
+    public void setUp() {
         userDAO = new UserDAOImpl();
         DatabaseUtil.initDatabase();
     }
 
     @Test
     public void test_registerUser() {
-        assertEquals(Boolean.FALSE, userDAO.checkRegistration("test", "0912345678"));
+        assertFalse(userDAO.checkRegistration("test", "0912345678"));
         User user = new User("test", "123456", "0912345678");
         userDAO.register(user);
-        assertEquals(Boolean.TRUE, userDAO.checkRegistration("test", "0912345678"));
+        assertTrue(userDAO.checkRegistration("test", "0912345678"));
     }
 
     @Test
