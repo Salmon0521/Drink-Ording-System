@@ -30,7 +30,7 @@ public class RegisterServlet extends HttpServlet {
         String registeredPassword = request.getParameter("R_Password");
         String registeredPhone = request.getParameter("R_Tel");
 
-        String hashRegisteredPassword = BCrypt.hashpw(registeredPassword, BCrypt.gensalt(10));
+        String hashRegisteredPassword = BCrypt.hashpw(registeredPassword, BCrypt.gensalt());
 
         User user = new User(registeredAccount, hashRegisteredPassword, registeredPhone);
         CustomerService customerService = new CustomerServiceImpl();

@@ -16,16 +16,15 @@ public class CustomerServiceImpl implements CustomerService{
     private final OrdersDAO ordersDAO = new OrdersDAOImpl();
 
     @Override
-    public Boolean customerLogin(HttpSession session, String account, String password){
-        User user = userDAO.getLogin(account, password);
-        if(user != null){
-            session.setAttribute("account", user.getAccount());
-            session.setAttribute("levels", user.getLevel());
-            return true;
+    public User login(String account, String password){
+        String hashPassword = userDAO.login(account, password);
+
+        User user = null;
+        if(hashPassword != null){
+            user = userDAO.getUserInfo(account, hashPassword);
         }
-        else{
-            return false;
-        }
+
+        return user;
     }
 
     @Override

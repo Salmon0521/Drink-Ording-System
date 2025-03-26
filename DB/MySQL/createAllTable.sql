@@ -2,7 +2,7 @@ create table user
 (
     UserID INT AUTO_INCREMENT PRIMARY KEY,
     Account VARCHAR(20) DEFAULT NULL,
-    Password CHAR(128) DEFAULT NULL,
+    Password VARCHAR(128) DEFAULT NULL,
     Level ENUM('普通會員', 'VIP') DEFAULT '普通會員',
     Phone VARCHAR(10) DEFAULT NULL
 );

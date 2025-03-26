@@ -1,5 +1,6 @@
 package servlet.login;
 
+import bean.user.User;
 import service.customer.CustomerService;
 import service.customer.CustomerServiceImpl;
 
@@ -25,12 +26,16 @@ public class LoginServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
         HttpSession session = request.getSession();
         String account = request.getParameter("Account");
         String password = request.getParameter("Password");
+
         CustomerService customerService = new CustomerServiceImpl();
-        if (customerService.customerLogin(session, account, password)){
+        User user = customerService.login(account, password);
+        if (user != null) {
+            session.setAttribute("account", account);
+            session.setAttribute("phone", user.getPhone());
+            session.setAttribute("level", user.getLevel());
             response.getWriter().print("0");
         }
         else {

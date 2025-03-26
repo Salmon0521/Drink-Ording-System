@@ -1,4 +1,4 @@
-package dao.bean.product;
+package dao.product;
 
 import bean.product.Product;
 import dao.product.ProductDAO;

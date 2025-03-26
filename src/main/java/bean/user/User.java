@@ -7,19 +7,15 @@ public class User {
     private String level;
     private String phone;
 
-    public User(String account, String level) {
-        this.account = account;
+    public User(String level, String phone) {
         this.level = level;
+        this.phone = phone;
     }
 
     public User(String account, String password, String phone) {
         this.account = account;
         this.password = password;
         this.phone = phone;
-    }
-
-    public User(String level) {
-        this.level = level;
     }
 
     public Integer getId() {
@@ -62,5 +58,3 @@ public class User {
         this.phone = phone;
     }
 }
-
-

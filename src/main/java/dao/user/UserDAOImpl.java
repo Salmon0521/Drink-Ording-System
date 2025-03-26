@@ -4,6 +4,7 @@ package dao.user;
 import db_driver.DBConnection;
 import db_driver.DBConnectionImpl;
 import bean.user.User;
+import org.mindrot.jbcrypt.BCrypt;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -13,7 +14,8 @@ import java.sql.SQLException;
 public class UserDAOImpl implements UserDAO {
 
     private final DBConnection dbConnection = new DBConnectionImpl();
-    private static final String GET_LOGIN = "SELECT * FROM user WHERE account = ? AND password = ?";
+    private static final String GET_USERINFO = "SELECT phone, level FROM user WHERE account = ? AND password = ?";
+    private static final String GET_PASSWORD = "SELECT password FROM user WHERE account = ?";
     private static final String GET_USERID = "SELECT userID FROM user WHERE account = ? AND phone = ?";
     private static final String GET_LEVEL = "SELECT * FROM user WHERE userid = ?";
     private static final String INSERT_USER = "INSERT INTO user(account, password, phone) VALUES (?,?,?)";
@@ -21,22 +23,49 @@ public class UserDAOImpl implements UserDAO {
     private static final String GET_ID = "SELECT user FROM user WHERE account = ?";
 
     @Override
-    public User getLogin(String account, String password){
+    public String login(String account, String password){
+        String hashPassword = "";
+        Connection connection = dbConnection.getConnection();
+
+        try(PreparedStatement preparedStatement = connection.prepareStatement(GET_PASSWORD))
+        {
+            preparedStatement.setString(1, account);
+
+            String hash = "";
+            try(ResultSet resultSet = preparedStatement.executeQuery()){
+                while(resultSet.next()){
+                    hash = resultSet.getString("password");
+                    if(BCrypt.checkpw(password, hash)){
+                        hashPassword = hash;
+                        break;
+                    }
+                }
+            }
+            connection.close();
+        }
+        catch(SQLException e)
+        {
+            e.printStackTrace();
+        }
+
+        return hashPassword;
+    }
+
+    @Override
+    public User getUserInfo(String account, String password){
         User user = null;
         Connection connection = dbConnection.getConnection();
 
-        try(PreparedStatement preparedStatement = connection.prepareStatement(GET_LOGIN))
+        try(PreparedStatement preparedStatement = connection.prepareStatement(GET_USERINFO))
         {
             preparedStatement.setString(1, account);
             preparedStatement.setString(2, password);
 
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
                 if (resultSet.next()) {
+                    String phone = resultSet.getString("phone");
                     String level = resultSet.getString("level");
-                    user = new User(account, level);
-                }
-                else{
-                    return user;
+                    user = new User(level, phone);
                 }
             }
             connection.close();

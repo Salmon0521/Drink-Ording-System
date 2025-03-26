@@ -1,4 +1,4 @@
-package dao.bean.orders;
+package dao.orders;
 
 import bean.order.Order;
 import dao.orders.OrdersDAO;
