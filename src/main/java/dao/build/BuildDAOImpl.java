@@ -14,6 +14,7 @@ public class BuildDAOImpl implements BuildDAO {
     private final DBConnection dbConnection = new DBConnectionImpl();
     private static final String GET_ORDERID = "SELECT build.OrderID FROM BUILD JOIN orders ON orders.OrderID = build.OrderID WHERE userID = ? and STATUS = ?";
     private static final String INSERT_BUILD = "INSERT INTO build(orderID, userID) VALUES (?,?)";
+
     public List<Integer> getOrderID(int customerID, int status){
         Connection connection = dbConnection.getConnection();
         List<Integer> orderIDList = new ArrayList<>();

@@ -21,7 +21,7 @@ public class OrderRecordServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();
-        String account = (String) session.getAttribute("account");
+        String account = String.valueOf(session.getAttribute("account"));
         if (account == null) {
             response.sendRedirect("Login");
             return;

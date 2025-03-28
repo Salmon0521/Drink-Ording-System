@@ -1,5 +1,7 @@
 package servlet.menu;
 
+import bean.product.Product;
+import com.google.gson.Gson;
 import service.cart.CartService;
 import service.cart.CartServiceImpl;
 import service.customer.CustomerService;
@@ -14,6 +16,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.util.List;
 
 @WebServlet(
         name = "MenuServlet",
@@ -25,20 +28,31 @@ public class MenuServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();
-        String account = (String) session.getAttribute("account");
+        String account = String.valueOf(session.getAttribute("account"));
+        String phone =  String.valueOf(session.getAttribute("phone"));
+
         if (account == null) {
             response.sendRedirect("Login");
             return;
         }
+
         CartService cartService = new CartServiceImpl();
-        cartService.showCart(session, account);
+        List<Product> customerCart = cartService.showCart(account, phone);
+
+        Integer totalPrice = 0;
+        for (Product product : customerCart) {
+            totalPrice += product.getPrice();
+        }
+
+        session.setAttribute("customerCart", new Gson().toJson(customerCart));
+        session.setAttribute("totalPrice", totalPrice);
         request.getRequestDispatcher(MENU_URL).forward(request, response);
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();
-        String account = (String) session.getAttribute("account");
+        String account = String.valueOf(session.getAttribute("account"));
 
         String ud = request.getParameter("ud");
         switch (ud) {

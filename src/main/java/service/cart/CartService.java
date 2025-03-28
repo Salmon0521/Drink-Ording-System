@@ -2,11 +2,11 @@ package service.cart;
 
 import bean.product.Product;
 
-import javax.servlet.http.HttpSession;
+import java.util.List;
 
 public interface CartService {
-    public void addProduct(String account, Product product);
+    public void addProduct(String account, String phone, Product product);
     public void deleteProduct(String account, Integer productID);
-    public void showCart(HttpSession session, String account);
+    public List<Product> showCart(String account, String phone);
 
 }

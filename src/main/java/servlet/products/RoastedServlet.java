@@ -20,12 +20,11 @@ import java.util.List;
 )
 public class RoastedServlet extends HttpServlet {
     private static final String CUSTOMER_URL = "WEB-INF/jsp/products/Roasted.jsp";
-    private static final String SUGARICE_URL = "Sugarice";
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();
-        String account = (String) session.getAttribute("account");
+        String account = String.valueOf(session.getAttribute("account"));
         if (account == null) {
             response.sendRedirect("Login");
             return;

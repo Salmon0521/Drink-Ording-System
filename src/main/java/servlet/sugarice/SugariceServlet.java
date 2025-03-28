@@ -22,8 +22,8 @@ public class SugariceServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();
-        String productName = (String) session.getAttribute("ProductName");
-        String account = (String) session.getAttribute("account");
+        String productName =  String.valueOf(session.getAttribute("ProductName"));
+        String account =  String.valueOf(session.getAttribute("account"));
         if (productName == null || account == null) {
             response.sendRedirect("Login");
             return;
@@ -35,7 +35,8 @@ public class SugariceServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String account = request.getSession().getAttribute("account").toString();
+        String account =  String.valueOf(request.getSession().getAttribute("account"));
+        String phone =  String.valueOf(request.getSession().getAttribute("phone"));
         String productName = request.getParameter("productName");
         String size = request.getParameter("size");
         String sugar = request.getParameter("sugar");
@@ -54,6 +55,6 @@ public class SugariceServlet extends HttpServlet {
         product.setQuantity(Integer.parseInt(quantity));
 
         CartService cartService = new CartServiceImpl();
-        cartService.addProduct(account, product);
+        cartService.addProduct(account, phone, product);
     }
 }
