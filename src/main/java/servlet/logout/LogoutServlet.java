@@ -21,8 +21,9 @@ public class LogoutServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
         HttpSession session = request.getSession();
         session.removeAttribute("account");
+        session.removeAttribute("level");
+        session.removeAttribute("phone");
     }
 }
