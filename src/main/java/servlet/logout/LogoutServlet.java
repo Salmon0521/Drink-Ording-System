@@ -1,4 +1,4 @@
-package servlet.login;
+package servlet.logout;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;

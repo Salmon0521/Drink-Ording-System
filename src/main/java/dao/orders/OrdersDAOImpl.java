@@ -100,21 +100,24 @@ public class OrdersDAOImpl implements OrdersDAO {
     public Integer initial(){
         Connection connection = dbConnection.getConnection();
         Integer orderID = null;
-        try {
-            PreparedStatement preparedStatement = connection.prepareStatement(INITIAL_ORDER);
+
+        try (PreparedStatement preparedStatement = connection.prepareStatement(INITIAL_ORDER)){
             preparedStatement.setInt(1, 1);
             preparedStatement.executeUpdate();
+        }catch (SQLException e) {
+            e.printStackTrace();
+        }
 
-            preparedStatement = connection.prepareStatement(GET_MAX_ORDERID);
+        try (PreparedStatement preparedStatement = connection.prepareStatement(GET_MAX_ORDERID)){
             ResultSet resultSet = preparedStatement.executeQuery();
             resultSet.next();
 
             orderID = resultSet.getInt(1);
-
             connection.close();
         }catch (SQLException e) {
             e.printStackTrace();
         }
+
         return orderID;
     }
 

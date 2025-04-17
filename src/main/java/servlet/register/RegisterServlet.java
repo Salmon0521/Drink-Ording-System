@@ -35,7 +35,7 @@ public class RegisterServlet extends HttpServlet {
         User user = new User(registeredAccount, hashRegisteredPassword, registeredPhone);
         CustomerService customerService = new CustomerServiceImpl();
 
-        if (customerService.register(user)){
+        if (Boolean.TRUE.equals(customerService.register(user))){
             response.getWriter().print("0");
         }
         else {
