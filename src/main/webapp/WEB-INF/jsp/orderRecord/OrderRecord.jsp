@@ -18,7 +18,7 @@
 <header>
     <h1>訂單紀錄</h1>
 </header>
-<span id="productInorderJson" style="display: none;">${productInorderJson}</span>
+<span id="productInOrderJson" style="display: none;">${productInOrderJson}</span>
 
 <div class="order-container">
     <div class="order-detailss">
