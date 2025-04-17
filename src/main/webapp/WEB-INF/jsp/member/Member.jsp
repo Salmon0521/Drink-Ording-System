@@ -27,7 +27,7 @@
 
     <div class="member-details">
         <h2>會員等級</h2>
-        <p><strong>等級：</strong> <span class="membership-level">${sessionScope.levels}</span></p>
+        <p><strong>等級：</strong> <span class="membership-level">${sessionScope.level}</span></p>
     </div>
         <div class="member-details">
 
