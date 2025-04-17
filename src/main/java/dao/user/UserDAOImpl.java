@@ -17,10 +17,9 @@ public class UserDAOImpl implements UserDAO {
     private static final String GET_USERINFO = "SELECT phone, level FROM user WHERE account = ? AND password = ?";
     private static final String GET_PASSWORD = "SELECT password FROM user WHERE account = ?";
     private static final String GET_USERID = "SELECT userID FROM user WHERE account = ? AND phone = ?";
-    private static final String GET_LEVEL = "SELECT * FROM user WHERE userid = ?";
     private static final String INSERT_USER = "INSERT INTO user(account, password, phone) VALUES (?,?,?)";
     private static final String UPDATE_LEVEL = "UPDATE user SET level = ? WHERE userID = ?";
-    private static final String GET_ID = "SELECT user FROM user WHERE account = ?";
+    private static final String GET_LEVEL = "SELECT level FROM user WHERE userID = ?";
 
     @Override
     public String login(String account, String password){
@@ -61,7 +60,7 @@ public class UserDAOImpl implements UserDAO {
             preparedStatement.setString(1, account);
             preparedStatement.setString(2, password);
 
-            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+            try (ResultSet resultSet = preparedStatement.executeQuery()){
                 if (resultSet.next()) {
                     String phone = resultSet.getString("phone");
                     String level = resultSet.getString("level");
@@ -78,7 +77,7 @@ public class UserDAOImpl implements UserDAO {
     }
 
     @Override
-    public Boolean checkRegistration(String account, String phone) {
+    public Boolean checkRegistration(String account, String phone){
         Integer userID = null;
         Connection connection = dbConnection.getConnection();
 
@@ -86,7 +85,7 @@ public class UserDAOImpl implements UserDAO {
         {
             preparedStatement.setString(1, account);
             preparedStatement.setString(2, phone);
-            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+            try (ResultSet resultSet = preparedStatement.executeQuery()){
                 if (resultSet.next()) {
                     userID = resultSet.getInt("userID");
                 }
@@ -104,7 +103,7 @@ public class UserDAOImpl implements UserDAO {
     }
 
     @Override
-    public Integer getUserID(String account, String phone) {
+    public Integer getUserID(String account, String phone){
         Integer userID = null;
         Connection connection = dbConnection.getConnection();
 
@@ -127,33 +126,6 @@ public class UserDAOImpl implements UserDAO {
     }
 
     @Override
-    public String getLevel(int userID){
-
-        String level = null;
-        Connection connection = dbConnection.getConnection();
-
-        try (PreparedStatement preparedStatement = connection.prepareStatement(GET_LEVEL))
-        {
-            preparedStatement.setInt(1, userID);
-
-            try (ResultSet resultSet = preparedStatement.executeQuery()) {
-                if(resultSet.next()){
-                    level = resultSet.getString("level");
-
-                }
-                else{
-                    return level;
-                }
-            }
-            connection.close();
-        }catch (SQLException e) {
-            e.printStackTrace();
-        }
-
-        return level;
-    }
-
-    @Override
     public void register(User user){
         Connection connection = dbConnection.getConnection();
 
@@ -171,7 +143,7 @@ public class UserDAOImpl implements UserDAO {
     }
 
     @Override
-    public  void updateLevel(int id, String levels){
+    public void updateLevel(int id, String levels){
         Connection connection = dbConnection.getConnection();
 
         try (PreparedStatement preparedStatement = connection.prepareStatement(UPDATE_LEVEL))
@@ -187,26 +159,24 @@ public class UserDAOImpl implements UserDAO {
     }
 
     @Override
-    public Integer getCustomerID(String account){
+    public String getLevel(int id){
+        String level = null;
         Connection connection = dbConnection.getConnection();
-        int customerID = 0;
 
-        try(PreparedStatement preparedStatement = connection.prepareStatement(GET_ID))
+        try (PreparedStatement preparedStatement = connection.prepareStatement(GET_LEVEL))
         {
-            preparedStatement.setString(1, account);
+            preparedStatement.setInt(1, id);
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
-                if(resultSet.next()) {
-                    customerID = resultSet.getInt("customerID");
-                }
-                else{
-                    return customerID;
+                if (resultSet.next()) {
+                    level = resultSet.getString("Level");
                 }
             }
+
             connection.close();
         }catch (SQLException e) {
             e.printStackTrace();
         }
-
-        return customerID;
+        return level;
     }
+
 }

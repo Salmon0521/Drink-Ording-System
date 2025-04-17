@@ -49,4 +49,24 @@ public class CartServiceImplTest {
         userCart = cartService.showCart("test", "0123456789");
         assertEquals(Integer.valueOf(2), userCart.get(0).getQuantity());
     }
+
+    @Test
+    public void test_deleteProductInCart() {
+        Product product = new Product();
+        product.setName("耶加雪非");
+        product.setSize("M");
+        product.setSugar("正常");
+        product.setIce("熱");
+        product.setQuantity(1);
+
+        cartService.addProduct("test", "0123456789", product);
+        List<Product> userCart = cartService.showCart("test", "0123456789");
+        assertEquals(1, userCart.size());
+        assertEquals(Integer.valueOf(1), userCart.get(0).getId());
+
+        cartService.deleteProduct("test", "0123456789", 1);
+
+        userCart = cartService.showCart("test", "0123456789");
+        assertTrue(userCart.isEmpty());
+    }
 }

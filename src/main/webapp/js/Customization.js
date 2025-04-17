@@ -10,7 +10,7 @@ function addToCart() {
     }
     else{
         $.ajax({
-            url: "Sugarice",
+            url: "Customization",
             type: "POST",
             data: {
                 productName: productName,

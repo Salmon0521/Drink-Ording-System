@@ -33,8 +33,8 @@ public class CartServiceImpl implements CartService{
     }
 
     @Override
-    public void deleteProduct(String account, Integer productID){
-        Integer customerID = userDAO.getCustomerID(account);
+    public void deleteProduct(String account, String phone, Integer productID){
+        Integer customerID = userDAO.getUserID(account, phone);
         Integer orderID = buildDAO.getOrderID(customerID, 1).get(0);
         cartDAO.deleteProduct(orderID, productID);
     }

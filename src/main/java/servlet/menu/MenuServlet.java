@@ -53,20 +53,23 @@ public class MenuServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();
         String account = String.valueOf(session.getAttribute("account"));
+        String phone =  String.valueOf(session.getAttribute("phone"));
 
         String ud = request.getParameter("ud");
         switch (ud) {
             case "sendOrder":
                 Integer amount =  Integer.parseInt(request.getParameter("amount"));
                 OrdersService ordersService = new OrdersServiceImpl();
-                ordersService.buildOrder(account, amount);
+                ordersService.buildOrder(account, phone, amount);
+
                 CustomerService customerService = new CustomerServiceImpl();
-                customerService.updateLevel(session, account);
+                String level = customerService.updateLevel(account, phone);
+                session.setAttribute("level", level);
                 break;
             case "delete":
                 Integer productID = Integer.parseInt(request.getParameter("productID"));
                 CartService cartService = new CartServiceImpl();
-                cartService.deleteProduct(account, productID);
+                cartService.deleteProduct(account, phone, productID);
                 break;
             default:
                 break;

@@ -8,7 +8,7 @@ function choose() {
         },
         success : function(response) {
             console.log(response);
-                window.location.href = "Sugarice";
+                window.location.href = "Customization";
         }
     });
 }

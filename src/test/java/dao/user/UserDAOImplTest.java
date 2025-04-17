@@ -34,13 +34,6 @@ public class UserDAOImplTest {
     }
 
     @Test
-    @Ignore("there are one more same account")
-    public void getID() {
-        Integer id = userDAO.getCustomerID("test");
-        System.out.println(id);
-    }
-
-    @Test
     public void test_getUserInfo() {
         User user = userDAO.getUserInfo("test", "$2a$10$W0BjSDWJzPkIgqMuuHvwfOCADLgDGo/fty71DabNE3vnGh398Dhui");
         assertEquals("普通會員", user.getLevel());
@@ -48,9 +41,9 @@ public class UserDAOImplTest {
     }
 
     @Test
-    @Ignore("Deprecated getLevel method")
-    public void update() {
-        userDAO.updateLevel(1,"VIP");
-        assertEquals("VIP", userDAO.getLevel(1));
+    public void test_getLevel() {
+        Integer id = userDAO.getUserID("test", "0123456789");
+        String level = userDAO.getLevel(id);
+        assertEquals("普通會員", level);
     }
 }

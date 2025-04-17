@@ -1,4 +1,4 @@
-package servlet.sugarice;
+package servlet.customization;
 
 import bean.product.Product;
 import service.cart.CartService;
@@ -13,11 +13,11 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 @WebServlet(
-        name = "SugariceServlet",
-        urlPatterns = {"/Sugarice"}
+        name = "CustomizationServlet",
+        urlPatterns = {"/Customization"}
 )
-public class SugariceServlet extends HttpServlet {
-    private static final String CUSTOMER_URL = "WEB-INF/jsp/sugarice/Sugarice.jsp";
+public class CustomizationServlet extends HttpServlet {
+    private static final String CUSTOMIZATION_URL = "WEB-INF/jsp/customization/Customization.jsp";
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -30,7 +30,7 @@ public class SugariceServlet extends HttpServlet {
         }
         request.setAttribute("productName", productName);
 
-        request.getRequestDispatcher(CUSTOMER_URL).forward(request, response);
+        request.getRequestDispatcher(CUSTOMIZATION_URL).forward(request, response);
     }
 
     @Override

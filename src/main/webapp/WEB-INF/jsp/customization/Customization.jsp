@@ -73,5 +73,5 @@
         </div>
     </div>
 </body>
-<script src="js/Sugarice.js"></script>
+<script src="js/Customization.js"></script>
 </html>

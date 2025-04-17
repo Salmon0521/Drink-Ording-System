@@ -9,7 +9,7 @@ import util.DatabaseUtil;
 
 import static org.junit.Assert.*;
 
-public class CustomerServiceTest {
+public class CustomerServiceImplTest {
     private CustomerService customerService;
     private UserDAOImpl userDAO;
 
@@ -45,5 +45,15 @@ public class CustomerServiceTest {
     public void test_loginFailure() {
         User user = customerService.login("test", "123");
         assertNull(user);
+    }
+
+    @Test
+    public void test_updateLevel() {
+        User user = customerService.login("test", "test");
+        assertEquals("0123456789", user.getPhone());
+        assertEquals("普通會員", user.getLevel());
+
+        String level = customerService.updateLevel("test", "0123456789");
+        assertEquals("VIP", level);
     }
 }

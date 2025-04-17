@@ -1,7 +1,7 @@
 package bean.order;
 
 public class Order {
-    private  Integer customerID;
+    private Integer customerID;
     private Integer productID;
     private String dates;
     private Integer amount;

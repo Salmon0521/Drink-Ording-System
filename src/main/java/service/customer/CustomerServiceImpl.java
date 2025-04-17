@@ -8,8 +8,6 @@ import dao.user.UserDAOImpl;
 import dao.orders.OrdersDAO;
 import dao.orders.OrdersDAOImpl;
 
-import javax.servlet.http.HttpSession;
-
 public class CustomerServiceImpl implements CustomerService{
     private final UserDAO userDAO = new UserDAOImpl();
     private final BuildDAO buildDAO = new BuildDAOImpl();
@@ -40,9 +38,9 @@ public class CustomerServiceImpl implements CustomerService{
     }
 
     @Override
-    public void updateLevel(HttpSession session, String account){
-        Integer customerID = userDAO.getCustomerID(account);
+    public String updateLevel(String account, String phone){
+        Integer customerID = userDAO.getUserID(account, phone);
         userDAO.updateLevel(customerID, "VIP");
-        session.setAttribute("level", "VIP");
+        return userDAO.getLevel(customerID);
     }
 }

@@ -1,5 +1,7 @@
 package servlet.member;
 
+import bean.order.Order;
+import com.google.gson.Gson;
 import service.orders.OrdersService;
 import service.orders.OrdersServiceImpl;
 
@@ -10,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.util.List;
 
 @WebServlet(
         name = "MemberServlet",
@@ -21,13 +24,17 @@ public class MemberServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();
-        String account = (String) session.getAttribute("account");
+        String account = String.valueOf(session.getAttribute("account"));
+        String phone =  String.valueOf(session.getAttribute("phone"));
+
         if (account == null) {
             response.sendRedirect("Login");
             return;
         }
         OrdersService ordersService = new OrdersServiceImpl();
-        ordersService.getOrder(session, account);
+        List<Order> orderList = ordersService.getOrder(account, phone);
+        String ordersJson = new Gson().toJson(orderList);
+        session.setAttribute("ordersJson", ordersJson);
         request.getRequestDispatcher(MEMBER_URL).forward(request, response);
     }
 
