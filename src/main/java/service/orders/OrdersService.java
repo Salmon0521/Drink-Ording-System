@@ -3,7 +3,6 @@ package service.orders;
 import bean.order.Order;
 import bean.product.Product;
 
-import javax.servlet.http.HttpSession;
 import java.util.List;
 
 public interface OrdersService {

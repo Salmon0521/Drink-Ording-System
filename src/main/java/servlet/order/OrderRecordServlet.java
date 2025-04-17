@@ -1,6 +1,5 @@
 package servlet.order;
 
-import bean.order.Order;
 import bean.product.Product;
 import com.google.gson.Gson;
 import service.orders.OrdersService;
