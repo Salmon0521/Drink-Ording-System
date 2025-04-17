@@ -1,27 +1,17 @@
 package dao.product;
 
 import bean.product.Product;
-import dao.product.ProductDAO;
-import dao.product.ProductDAOImpl;
 import org.junit.Before;
 import org.junit.Test;
 import util.DatabaseUtil;
-
-import java.util.List;
 
 public class ProductDAOImplTest {
     private ProductDAO productDAO;
 
     @Before
-    public void setUp() throws Exception {
+    public void setUp() {
         productDAO = new ProductDAOImpl();
         DatabaseUtil.initDatabase();
-    }
-
-    @Test
-    public void get() {
-        Product product = productDAO.getAddInfo(95);
-        System.out.println(product.getName());
     }
 
     @Test
@@ -34,15 +24,5 @@ public class ProductDAOImplTest {
         product.setPrice(70);
         Integer ProductID = productDAO.getProductID(product);
         System.out.println(ProductID);
-    }
-
-    @Test
-    public void getType() {
-        List<Product> typeList = productDAO.getType();
-
-        for(int i = 0; i < typeList.size(); i++){
-            Product product = typeList.get(i);
-            System.out.println(product.getType());
-        }
     }
 }
