@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="css/orderRecord.css">
     <script src="lib/jquery.min.js"></script>
     <script src="lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="js/orderRecord.js"></script>
+    <script src="js/OrderRecord.js"></script>
 
 </head>
 
