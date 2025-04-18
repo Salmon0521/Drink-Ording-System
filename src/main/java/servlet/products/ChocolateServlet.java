@@ -2,8 +2,8 @@ package servlet.products;
 
 import bean.product.Product;
 import com.google.gson.Gson;
-import dao.product.ProductDAO;
-import dao.product.ProductDAOImpl;
+import service.product.ProductService;
+import service.product.ProductServiceImpl;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -15,11 +15,11 @@ import java.io.IOException;
 import java.util.List;
 
 @WebServlet(
-        name = "RoastedServlet",
-        urlPatterns = {"/Roasted"}
+        name = "ChocolateServlet",
+        urlPatterns = {"/Chocolate"}
 )
-public class RoastedServlet extends HttpServlet {
-    private static final String CUSTOMER_URL = "WEB-INF/jsp/products/Roasted.jsp";
+public class ChocolateServlet extends HttpServlet {
+    private static final String CUSTOMER_URL = "WEB-INF/jsp/products/Chocolate.jsp";
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -29,10 +29,11 @@ public class RoastedServlet extends HttpServlet {
             response.sendRedirect("Login");
             return;
         }
-        ProductDAO productDAO = new ProductDAOImpl();
-        List<Product> roasted = productDAO.getCoffee();
-        String roastedJson = new Gson().toJson(roasted);
-        request.setAttribute("json", roastedJson);
+
+        ProductService productService = new ProductServiceImpl();
+        List<Product> chocolate = productService.showProducts("Chocolate");
+        String chocolateJson = new Gson().toJson(chocolate);
+        request.setAttribute("json", chocolateJson);
 
         request.getRequestDispatcher(CUSTOMER_URL).forward(request, response);
     }

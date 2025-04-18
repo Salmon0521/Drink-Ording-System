@@ -39,11 +39,9 @@ public class OrderRecordServlet extends HttpServlet {
         String phone =  String.valueOf(session.getAttribute("phone"));
 
         String date = request.getParameter("date");
-        session.setAttribute("date", date);
-
         OrdersService ordersService = new OrdersServiceImpl();
         List<Product> productList = ordersService.getOrdersByDate(account, phone, date);
-        String productInorderJson = new Gson().toJson(productList);
-        session.setAttribute("productInorderJson", productInorderJson);
+        String productInOrderJson = new Gson().toJson(productList);
+        session.setAttribute("productInOrderJson", productInOrderJson);
     }
 }

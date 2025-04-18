@@ -1,18 +1,18 @@
 function showList() {
-    let productInorderJson =  JSON.parse($("#productInorderJson")[0].textContent);
+    let productInOrderJson =  JSON.parse($("#productInOrderJson")[0].textContent);
     let count = 0;
-    for (let i = 0; i < productInorderJson.length; i++) {
-        let total = productInorderJson[i].price * productInorderJson[i].quantity;
+    for (let i = 0; i < productInOrderJson.length; i++) {
+        let total = productInOrderJson[i].price * productInOrderJson[i].quantity;
         count += total;
         $("#productList").append(
             "<tbody>" +
             "<tr>" +
-            "<td>" + productInorderJson[i].name + "</td>" +
-            "<td>" + productInorderJson[i].sugar + "</td>" +
-            "<td>" + productInorderJson[i].ice + "</td>" +
-            "<td>" + productInorderJson[i].size + "</td>" +
-            "<td> NT$" + productInorderJson[i].price + "</td>" +
-            "<td>" + productInorderJson[i].quantity + "</td>" +
+            "<td>" + productInOrderJson[i].name + "</td>" +
+            "<td>" + productInOrderJson[i].sugar + "</td>" +
+            "<td>" + productInOrderJson[i].ice + "</td>" +
+            "<td>" + productInOrderJson[i].size + "</td>" +
+            "<td> NT$" + productInOrderJson[i].price + "</td>" +
+            "<td>" + productInOrderJson[i].quantity + "</td>" +
             "<td> NT$" + total + "</td>" +
             "</tr>" +
             "</tbody>"

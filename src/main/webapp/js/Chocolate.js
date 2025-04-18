@@ -1,7 +1,7 @@
 function choose() {
     let productName = event.target.value;
     $.ajax({
-        url : "Roasted",
+        url : "Chocolate",
         type : "POST",
         data: {
             productName : productName
@@ -14,11 +14,11 @@ function choose() {
 }
 
 function showList() {
-    let roastedJson =  JSON.parse($("#roastedJson")[0].textContent);
+    let cocolateJson =  JSON.parse($("#cocolateJson")[0].textContent);
 
-    for (let i = 0; i < roastedJson.length; i++) {
+    for (let i = 0; i < cocolateJson.length; i++) {
         $("#main").append(
-            "<button value='" + roastedJson[i].name + "' onclick='choose()'>" + roastedJson[i].name + "</button>"
+            "<button value='" + cocolateJson[i].name + "' onclick='choose()'>" + cocolateJson[i].name + "</button>"
         );
     }
 }

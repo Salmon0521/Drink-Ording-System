@@ -2,8 +2,8 @@ package servlet.products;
 
 import bean.product.Product;
 import com.google.gson.Gson;
-import dao.product.ProductDAO;
-import dao.product.ProductDAOImpl;
+import service.product.ProductService;
+import service.product.ProductServiceImpl;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -29,8 +29,9 @@ public class LatteServlet extends HttpServlet {
             response.sendRedirect("Login");
             return;
         }
-        ProductDAO productDAO = new ProductDAOImpl();
-        List<Product> latte = productDAO.getLatte();
+
+        ProductService productService = new ProductServiceImpl();
+        List<Product> latte = productService.showProducts("Latte");
         String latteJson = new Gson().toJson(latte);
         request.setAttribute("json", latteJson);
 

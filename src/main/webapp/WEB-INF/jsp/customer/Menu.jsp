@@ -47,8 +47,8 @@
                 <li><a href="Milk" style="font-size:30px;">牛奶</a></li>
                 <li><a href="Latte" style="font-size:30px;">拿鐵</a></li>
                 <li><a href="Hand" style="font-size:30px;">手沖</a></li>
-                <li><a href="Roasted" style="font-size:30px;">烘培</a></li>
-                <li><a href="Coco" style="font-size:30px;">可可</a></li>
+                <li><a href="Coffee" style="font-size:30px;">烘培</a></li>
+                <li><a href="Chocolate" style="font-size:30px;">可可</a></li>
             </ul>
         </nav>
     </header>

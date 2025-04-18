@@ -5,20 +5,20 @@
 <html lang="en">
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <script src="js/Coco.js"></script>
+    <script src="js/Coffee.js"></script>
 </head>
 
 <body >
 <!-- Wrapper -->
-    <span id="cocoJson" style="display: none;">${json}</span>
+    <span id="coffeeJson" style="display: none;">${json}</span>
     <div>
         <!-- Main -->
         <div class = "bg">
-            <article id="coco">
+            <article id="coffee">
                 <div id="wrapper">
-                    <h1>CHOCOLATE</h1>
-                    <span ><img src="img/coco.jpg" style="max-width: 100%" id="drinks"/></span>
-                    <h1  align="center">今天想喝什麼巧古力呢?</h1>
+                    <h1>FRESH COFFEE ROASTED</h1>
+                    <span ><img src="img/roasted.jpg" style="max-width: 100%" id="drinks"/></span>
+                    <h1  align="center">今天想喝什麼烘焙咖啡呢?</h1>
                     <ul>
                         <div align="center" id="main">
                         </div>
