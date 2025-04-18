@@ -27,7 +27,6 @@ public class OrdersDAOImpl implements OrdersDAO {
                                                 WHERE build.userID = ? AND dates = ?;
                                                 """;
     private static final String GET_MAX_ORDERID = "SELECT MAX(orderID) FROM orders";
-    private static final String INSERT_ORDER = "INSERT INTO orders(userID, productID, dates, amount, quantity) VALUES (?,?,?,?,?)";
     private static final String UPDATE_ORDER = "UPDATE orders SET dates = ?, amount = ?, status = ? WHERE orderID = ?";
 
     @Override
@@ -119,23 +118,6 @@ public class OrdersDAOImpl implements OrdersDAO {
         }
 
         return orderID;
-    }
-
-    public void insert(int userID, int productID, String dates, int amount, int quantity){
-        Connection connection = dbConnection.getConnection();
-
-        try (PreparedStatement preparedStatement = connection.prepareStatement(INSERT_ORDER)){
-            preparedStatement.setInt(1, userID);
-            preparedStatement.setInt(2,productID);
-            preparedStatement.setString(3,dates);
-            preparedStatement.setInt(4,amount);
-            preparedStatement.setInt(5,quantity);
-
-            preparedStatement.executeUpdate();
-            connection.close();
-        }catch (SQLException e) {
-            e.printStackTrace();
-        }
     }
 
     public void update(int orderID, String dates, int amount, int status){

@@ -2,7 +2,6 @@ package dao.user;
 
 import bean.user.User;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.mindrot.jbcrypt.BCrypt;
 import util.DatabaseUtil;

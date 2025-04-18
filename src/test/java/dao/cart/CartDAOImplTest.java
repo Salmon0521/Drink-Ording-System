@@ -1,51 +1,40 @@
 package dao.cart;
 
-import bean.product.Product;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
+import util.DatabaseUtil;
 
-import java.util.List;
+import static org.junit.Assert.assertEquals;
 
 public class CartDAOImplTest {
 
     private CartDAO cartDAO;
 
     @Before
-    public void setUp() throws Exception {
+    public void setUp() {
         cartDAO = new CartDAOImpl();
+        DatabaseUtil.initDatabase();
     }
 
     @Test
-    public void insert() {
+    public void test_insertProduct() {
         cartDAO.insert(1,1,3);
+        assertEquals(3, cartDAO.productExist(1,1).intValue());
     }
 
     @Test
-    public void delete() {
-        cartDAO.deleteProduct(1,3);
-    }
-
-
-    @Test
-    @Ignore
-    public void get() {
-        List<Product> productList = cartDAO.getProduct(20);
-
-        for(int i = 0; i < 3; i++){
-            Product product = productList.get(i);
-            System.out.println(product.getQuantity());
-            System.out.println(product.getName());
-            System.out.println(product.getIce());
-            System.out.println(product.getSize());
-            System.out.println(product.getSugar());
-            System.out.println(product.getPrice());
-        }
-
+    public void test_deleteProduct() {
+        cartDAO.insert(1,1,3);
+        assertEquals(3, cartDAO.productExist(1,1).intValue());
+        cartDAO.deleteProduct(1,1);
+        assertEquals(0, cartDAO.getProduct(1).size());
     }
 
     @Test
-    public void updateQuantity() {
-        cartDAO.updateQuantity(1,327,3);
+    public void test_updateQuantity() {
+        cartDAO.insert(1,1,3);
+        assertEquals(3, cartDAO.productExist(1,1).intValue());
+        cartDAO.updateQuantity(1,1,5);
+        assertEquals(5, cartDAO.productExist(1,1).intValue());
     }
 }
