@@ -1,16 +1,17 @@
 package dao.user;
 
-
 import db_driver.DBConnection;
 import db_driver.DBConnectionImpl;
 import bean.user.User;
 import org.mindrot.jbcrypt.BCrypt;
+import org.springframework.stereotype.Repository;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+@Repository
 public class UserDAOImpl implements UserDAO {
 
     private final DBConnection dbConnection = new DBConnectionImpl();

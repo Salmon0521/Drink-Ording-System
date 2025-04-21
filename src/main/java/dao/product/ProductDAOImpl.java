@@ -3,6 +3,7 @@ package dao.product;
 import db_driver.DBConnection;
 import db_driver.DBConnectionImpl;
 import bean.product.Product;
+import org.springframework.stereotype.Repository;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -11,8 +12,9 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+@Repository
 public class ProductDAOImpl implements ProductDAO{
-    private DBConnection dbConnection = new DBConnectionImpl();
+    private final DBConnection dbConnection = new DBConnectionImpl();
     private static final String GET_PRODUCTS_BY_TYPE = "SELECT distinct ProductName FROM product WHERE type = ?";
     private static final String GET_PRODUCTID = "SELECT ProductID FROM product WHERE ProductName = ? AND ice = ? AND size = ? AND sugar = ?";
 

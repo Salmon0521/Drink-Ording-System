@@ -2,16 +2,21 @@ package service.customer;
 
 import bean.user.User;
 import dao.build.BuildDAO;
-import dao.build.BuildDAOImpl;
 import dao.user.UserDAO;
-import dao.user.UserDAOImpl;
 import dao.orders.OrdersDAO;
-import dao.orders.OrdersDAOImpl;
+import org.springframework.stereotype.Service;
 
+@Service
 public class CustomerServiceImpl implements CustomerService{
-    private final UserDAO userDAO = new UserDAOImpl();
-    private final BuildDAO buildDAO = new BuildDAOImpl();
-    private final OrdersDAO ordersDAO = new OrdersDAOImpl();
+    private final UserDAO userDAO;
+    private final BuildDAO buildDAO;
+    private final OrdersDAO ordersDAO;
+
+    public CustomerServiceImpl(UserDAO userDAO, BuildDAO buildDAO, OrdersDAO ordersDAO) {
+        this.userDAO = userDAO;
+        this.buildDAO = buildDAO;
+        this.ordersDAO = ordersDAO;
+    }
 
     @Override
     public User login(String account, String password){

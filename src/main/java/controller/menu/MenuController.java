@@ -2,6 +2,7 @@ package controller.menu;
 
 import bean.product.Product;
 import com.google.gson.Gson;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -21,6 +22,21 @@ import java.util.List;
 @RestController
 public class MenuController {
 
+    @Autowired
+    private final CustomerService customerService;
+
+    @Autowired
+    private final CartService cartService;
+
+    @Autowired
+    private final OrdersService ordersService;
+
+    public MenuController(CustomerService customerService, CartService cartService, OrdersService ordersService) {
+        this.customerService = customerService;
+        this.cartService = cartService;
+        this.ordersService = ordersService;
+    }
+
     @GetMapping("/CustomerMenu")
     public ModelAndView showMenuView(HttpSession session) {
         String account = String.valueOf(session.getAttribute("account"));
@@ -30,7 +46,6 @@ public class MenuController {
             return new ModelAndView("redirect:/Login");
         }
 
-        CartService cartService = new CartServiceImpl();
         List<Product> customerCart = cartService.showCart(account, phone);
         int totalPrice = customerCart.stream().mapToInt(Product::getPrice).sum();
 
@@ -52,15 +67,11 @@ public class MenuController {
 
         switch (ud) {
             case "sendOrder":
-                OrdersService ordersService = new OrdersServiceImpl();
                 ordersService.buildOrder(account, phone, amount);
-
-                CustomerService customerService = new CustomerServiceImpl();
                 String level = customerService.updateLevel(account, phone);
                 session.setAttribute("level", level);
                 break;
             case "delete":
-                CartService cartService = new CartServiceImpl();
                 cartService.deleteProduct(account, phone, productID);
                 break;
             default:

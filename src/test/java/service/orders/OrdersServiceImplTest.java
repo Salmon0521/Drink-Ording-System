@@ -2,27 +2,38 @@ package service.orders;
 
 import bean.order.Order;
 import bean.product.Product;
-import org.junit.Before;
-import org.junit.Test;
+import dao.build.BuildDAOImpl;
+import dao.cart.CartDAOImpl;
+import dao.orders.OrdersDAOImpl;
+import dao.product.ProductDAOImpl;
+import dao.user.UserDAOImpl;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
 import service.cart.CartService;
 import service.cart.CartServiceImpl;
+import start.DrinkShopApplication;
 import util.DatabaseUtil;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
-import java.util.Optional;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
+
+@SpringBootTest(classes = DrinkShopApplication.class)
 public class OrdersServiceImplTest {
+
+    @Autowired
     private OrdersService ordersService;
+
+    @Autowired
     private CartService cartService;
 
-    @Before
+    @BeforeEach
     public void setUp() {
-        ordersService = new OrdersServiceImpl();
-        cartService = new CartServiceImpl();
         DatabaseUtil.initDatabase();
     }
 

@@ -3,6 +3,7 @@ package dao.cart;
 import db_driver.DBConnection;
 import db_driver.DBConnectionImpl;
 import bean.product.Product;
+import org.springframework.stereotype.Repository;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -11,6 +12,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+@Repository
 public class CartDAOImpl implements CartDAO{
 
     private final DBConnection dbConnection = new DBConnectionImpl();

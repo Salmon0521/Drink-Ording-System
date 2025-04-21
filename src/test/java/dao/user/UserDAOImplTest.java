@@ -1,20 +1,25 @@
 package dao.user;
 
 import bean.user.User;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.mindrot.jbcrypt.BCrypt;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import start.DrinkShopApplication;
 import util.DatabaseUtil;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
+
+@SpringBootTest(classes = DrinkShopApplication.class)
 public class UserDAOImplTest {
 
+    @Autowired
     private UserDAO userDAO;
 
-    @Before
+    @BeforeEach
     public void setUp() {
-        userDAO = new UserDAOImpl();
         DatabaseUtil.initDatabase();
     }
 

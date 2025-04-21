@@ -4,6 +4,7 @@ import db_driver.DBConnection;
 import db_driver.DBConnectionImpl;
 import bean.order.Order;
 import bean.product.Product;
+import org.springframework.stereotype.Repository;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -12,9 +13,10 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+@Repository
 public class OrdersDAOImpl implements OrdersDAO {
 
-    private DBConnection dbConnection = new DBConnectionImpl();
+    private final DBConnection dbConnection = new DBConnectionImpl();
     private static final String GET_ORDER = "SELECT * FROM orders JOIN build ON build.orderID = orders.orderID WHERE userID = ? AND Status = 0 ORDER BY dates ASC";
     private static final String INITIAL_ORDER = "INSERT INTO orders(status) VALUES (?)";
     private static final String GET_PRODUCT = """

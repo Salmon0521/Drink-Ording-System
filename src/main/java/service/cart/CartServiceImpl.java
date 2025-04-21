@@ -2,21 +2,26 @@ package service.cart;
 
 import bean.product.Product;
 import dao.build.BuildDAO;
-import dao.build.BuildDAOImpl;
 import dao.cart.CartDAO;
-import dao.cart.CartDAOImpl;
 import dao.user.UserDAO;
-import dao.user.UserDAOImpl;
 import dao.product.ProductDAO;
-import dao.product.ProductDAOImpl;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public class CartServiceImpl implements CartService{
-    private final ProductDAO productDAO = new ProductDAOImpl();
-    private final UserDAO userDAO = new UserDAOImpl();
-    private final CartDAO cartDAO = new CartDAOImpl();
-    private final BuildDAO buildDAO = new BuildDAOImpl();
+    private final ProductDAO productDAO;
+    private final UserDAO userDAO;
+    private final CartDAO cartDAO;
+    private final BuildDAO buildDAO;
+
+    public CartServiceImpl(ProductDAO productDAO, UserDAO userDAO, CartDAO cartDAO, BuildDAO buildDAO) {
+        this.productDAO = productDAO;
+        this.userDAO = userDAO;
+        this.cartDAO = cartDAO;
+        this.buildDAO = buildDAO;
+    }
 
     @Override
     public void addProduct(String account, String phone, Product product){

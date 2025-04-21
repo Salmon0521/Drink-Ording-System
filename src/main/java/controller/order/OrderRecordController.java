@@ -2,6 +2,7 @@ package controller.order;
 
 import bean.product.Product;
 import com.google.gson.Gson;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -16,6 +17,13 @@ import java.util.List;
 
 @RestController
 public class OrderRecordController {
+
+    @Autowired
+    private final OrdersService ordersService;
+
+    public OrderRecordController(OrdersService ordersService) {
+        this.ordersService = ordersService;
+    }
 
     @GetMapping("/OrderRecord")
     public ModelAndView showOrderRecordView(HttpSession session) {
@@ -36,7 +44,6 @@ public class OrderRecordController {
         }
         session.setAttribute("date", date);
 
-        OrdersService ordersService = new OrdersServiceImpl();
         List<Product> productList = ordersService.getOrdersByDate(account, phone, date);
         String productInorderJson = new Gson().toJson(productList);
         session.setAttribute("productInorderJson", productInorderJson);

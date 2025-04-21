@@ -1,18 +1,22 @@
 package dao.cart;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import start.DrinkShopApplication;
 import util.DatabaseUtil;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
+@SpringBootTest(classes = DrinkShopApplication.class)
 public class CartDAOImplTest {
 
+    @Autowired
     private CartDAO cartDAO;
 
-    @Before
+    @BeforeEach
     public void setUp() {
-        cartDAO = new CartDAOImpl();
         DatabaseUtil.initDatabase();
     }
 

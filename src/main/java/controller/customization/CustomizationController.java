@@ -1,6 +1,7 @@
 package controller.customization;
 
 import bean.product.Product;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -13,6 +14,13 @@ import jakarta.servlet.http.HttpSession;
 
 @RestController
 public class CustomizationController {
+
+    @Autowired
+    private final CartService cartService;
+
+    public CustomizationController(CartService cartService) {
+        this.cartService = cartService;
+    }
 
     @GetMapping("/Customization")
     public ModelAndView showCustomizationView(HttpSession session) {
@@ -56,7 +64,6 @@ public class CustomizationController {
         product.setIce(ice);
         product.setQuantity(Integer.parseInt(quantity));
 
-        CartService cartService = new CartServiceImpl(); // or inject via @Autowired if it's a bean
         cartService.addProduct(account, phone, product);
 
         return new ModelAndView("redirect:/CustomerMenu");

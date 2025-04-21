@@ -8,15 +8,23 @@ import dao.user.UserDAO;
 import dao.user.UserDAOImpl;
 import dao.orders.OrdersDAO;
 import dao.orders.OrdersDAOImpl;
+import org.springframework.stereotype.Service;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
+@Service
 public class  OrdersServiceImpl implements OrdersService{
-    private final UserDAO userDAO = new UserDAOImpl();
-    private final OrdersDAO ordersDAO = new OrdersDAOImpl();
-    private final BuildDAO buildDAO = new BuildDAOImpl();
+    private final UserDAO userDAO;
+    private final OrdersDAO ordersDAO;
+    private final BuildDAO buildDAO;
+
+    public OrdersServiceImpl(UserDAO userDAO, OrdersDAO ordersDAO, BuildDAO buildDAO) {
+        this.userDAO = userDAO;
+        this.ordersDAO = ordersDAO;
+        this.buildDAO = buildDAO;
+    }
 
 
     @Override

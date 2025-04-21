@@ -1,22 +1,31 @@
 package service.customer;
 
 import bean.user.User;
+import dao.build.BuildDAOImpl;
+import dao.orders.OrdersDAOImpl;
 import dao.user.UserDAOImpl;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.mindrot.jbcrypt.BCrypt;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import start.DrinkShopApplication;
 import util.DatabaseUtil;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
+
+@SpringBootTest(classes = DrinkShopApplication.class)
 public class CustomerServiceImplTest {
+
+    @Autowired
     private CustomerService customerService;
+
+    @Autowired
     private UserDAOImpl userDAO;
 
-    @Before
+    @BeforeEach
     public void setUp() {
-        customerService = new CustomerServiceImpl();
-        userDAO = new UserDAOImpl();
         DatabaseUtil.initDatabase();
     }
 

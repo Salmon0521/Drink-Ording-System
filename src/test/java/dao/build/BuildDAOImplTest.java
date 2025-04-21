@@ -1,19 +1,24 @@
 package dao.build;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import start.DrinkShopApplication;
 import util.DatabaseUtil;
 
 import java.util.List;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
+@SpringBootTest(classes = DrinkShopApplication.class)
 public class BuildDAOImplTest {
+
+    @Autowired
     private BuildDAO buildDAO;
 
-    @Before
+    @BeforeEach
     public void setUp() throws Exception {
-        buildDAO = new BuildDAOImpl();
         DatabaseUtil.initDatabase();
     }
 

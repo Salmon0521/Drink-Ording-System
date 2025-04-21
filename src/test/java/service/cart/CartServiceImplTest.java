@@ -1,23 +1,30 @@
 package service.cart;
 
 import bean.product.Product;
-import dao.product.ProductDAO;
-import org.junit.Before;
-import org.junit.Test;
+import dao.build.BuildDAOImpl;
+import dao.cart.CartDAOImpl;
+import dao.product.ProductDAOImpl;
+import dao.user.UserDAOImpl;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import start.DrinkShopApplication;
 import util.DatabaseUtil;
 
 import java.util.List;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
+
+@SpringBootTest(classes = DrinkShopApplication.class)
 public class CartServiceImplTest {
 
-    private ProductDAO productDAO;
+    @Autowired
     private CartService cartService;
 
-    @Before
+    @BeforeEach
     public void setUp() throws Exception {
-        cartService = new CartServiceImpl();
         DatabaseUtil.initDatabase();
     }
 

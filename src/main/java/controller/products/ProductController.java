@@ -4,6 +4,7 @@ import bean.product.Product;
 import com.google.gson.Gson;
 
 import jakarta.servlet.http.HttpSession;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -17,7 +18,12 @@ import java.util.List;
 @RestController
 public class ProductController {
 
-    private final ProductService productService = new ProductServiceImpl();
+    @Autowired
+    private final ProductService productService;
+
+    public ProductController(ProductService productService) {
+        this.productService = productService;
+    }
 
     @GetMapping("/Chocolate")
     public ModelAndView showCocoView(HttpSession session) {

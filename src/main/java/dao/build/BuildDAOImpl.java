@@ -2,6 +2,7 @@ package dao.build;
 
 import db_driver.DBConnection;
 import db_driver.DBConnectionImpl;
+import org.springframework.stereotype.Repository;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -10,6 +11,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+@Repository
 public class BuildDAOImpl implements BuildDAO {
     private final DBConnection dbConnection = new DBConnectionImpl();
     private static final String GET_ORDERID = "SELECT build.OrderID FROM BUILD JOIN orders ON orders.OrderID = build.OrderID WHERE userID = ? and STATUS = ?";
