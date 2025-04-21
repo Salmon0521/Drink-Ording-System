@@ -2,8 +2,6 @@ package controller.products;
 
 import bean.product.Product;
 import com.google.gson.Gson;
-import dao.product.ProductDAO;
-import dao.product.ProductDAOImpl;
 
 import jakarta.servlet.http.HttpSession;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,31 +9,33 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
+import service.product.ProductService;
+import service.product.ProductServiceImpl;
 
 import java.util.List;
 
 @RestController
 public class ProductController {
 
-    private final ProductDAO productDAO = new ProductDAOImpl();
+    private final ProductService productService = new ProductServiceImpl();
 
-    @GetMapping("/Coco")
+    @GetMapping("/Chocolate")
     public ModelAndView showCocoView(HttpSession session) {
         String account = String.valueOf(session.getAttribute("account"));
         if (account == null) {
             return new ModelAndView("redirect:/Login");
         }
 
-        List<Product> coco = productDAO.getChocolate();
-        ModelAndView mav = new ModelAndView("/products/Coco");
+        List<Product> chocolate = productService.showProducts("Chocolate");
+        ModelAndView mav = new ModelAndView("/products/Chocolate");
 
-        String cocoJson = new Gson().toJson(coco);
+        String cocoJson = new Gson().toJson(chocolate);
         mav.addObject("json", cocoJson);
 
         return mav;
     }
 
-    @PostMapping("/Coco")
+    @PostMapping("/Chocolate")
     public ModelAndView handleCocoPost(@RequestParam("productName") String productName,
                                                                      HttpSession session) {
         String account = String.valueOf(session.getAttribute("account"));
@@ -53,7 +53,7 @@ public class ProductController {
             return new ModelAndView("redirect:/Login");
         }
 
-        List<Product> hand = productDAO.getBoutique();
+        List<Product> hand = productService.showProducts("Boutique hand coffee");
         ModelAndView mav = new ModelAndView("products/Hand");
         mav.addObject("json", new Gson().toJson(hand));
         return mav;
@@ -79,7 +79,7 @@ public class ProductController {
             return new ModelAndView("redirect:/Login");
         }
 
-        List<Product> latte = productDAO.getLatte();
+        List<Product> latte = productService.showProducts("Latte");
         ModelAndView mav = new ModelAndView("products/Latte");
         mav.addObject("json", new Gson().toJson(latte));
         return mav;
@@ -106,7 +106,7 @@ public class ProductController {
             return new ModelAndView("redirect:/Login");
         }
 
-        List<Product> tea = productDAO.getTea();
+        List<Product> tea = productService.showProducts("Tea");
         ModelAndView mav = new ModelAndView("products/Tea");
         mav.addObject("json", new Gson().toJson(tea));
         return mav;
@@ -133,7 +133,7 @@ public class ProductController {
             return new ModelAndView("redirect:/Login");
         }
 
-        List<Product> milk = productDAO.getMilk();
+        List<Product> milk = productService.showProducts("Milk");
         ModelAndView mav = new ModelAndView("products/Milk");
         mav.addObject("json", new Gson().toJson(milk));
         return mav;
@@ -151,20 +151,20 @@ public class ProductController {
         return new ModelAndView("customization/Customization");
     }
 
-    @GetMapping("/Roasted")
+    @GetMapping("/Coffee")
     public ModelAndView showRoastedView(HttpSession session) {
         String account = String.valueOf(session.getAttribute("account"));
         if (account == null) {
             return new ModelAndView("redirect:/Login");
         }
 
-        List<Product> roasted = productDAO.getCoffee();
-        ModelAndView mav = new ModelAndView("products/Roasted");
-        mav.addObject("json", new Gson().toJson(roasted));
+        List<Product> coffee = productService.showProducts("Coffee");
+        ModelAndView mav = new ModelAndView("products/Coffee");
+        mav.addObject("json", new Gson().toJson(coffee));
         return mav;
     }
 
-    @PostMapping("/Roasted")
+    @PostMapping("/Coffee")
     public ModelAndView handleRoastedPost(@RequestParam("productName") String productName,
                                           HttpSession session) {
         String account = String.valueOf(session.getAttribute("account"));

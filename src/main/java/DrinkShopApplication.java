@@ -1,11 +1,9 @@
-package controller;
-
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.web.servlet.ServletComponentScan;
+import org.springframework.context.annotation.ComponentScan;
 
+@ComponentScan(basePackages = {"controller", "service", "dao", "bean"})
 @SpringBootApplication
-@ServletComponentScan(basePackages = "controller")
 public class DrinkShopApplication {
     public static void main(String[] args) {
         SpringApplication.run(DrinkShopApplication.class, args);
