@@ -2,17 +2,11 @@ package service.orders;
 
 import bean.order.Order;
 import bean.product.Product;
-import dao.build.BuildDAOImpl;
-import dao.cart.CartDAOImpl;
-import dao.orders.OrdersDAOImpl;
-import dao.product.ProductDAOImpl;
-import dao.user.UserDAOImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import service.cart.CartService;
-import service.cart.CartServiceImpl;
 import start.DrinkShopApplication;
 import util.DatabaseUtil;
 
@@ -24,7 +18,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
 @SpringBootTest(classes = DrinkShopApplication.class)
-public class OrdersServiceImplTest {
+class OrdersServiceImplTest {
 
     @Autowired
     private OrdersService ordersService;
@@ -38,7 +32,7 @@ public class OrdersServiceImplTest {
     }
 
     @Test
-    public void test_getOrdersByDate() {
+    void test_getOrdersByDate() {
         Product product = new Product();
         product.setName("耶加雪非");
         product.setSize("M");

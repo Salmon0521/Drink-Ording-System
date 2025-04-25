@@ -10,13 +10,13 @@ import org.springframework.web.client.RestTemplate;
 import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest(classes = DrinkShopApplication.class, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-public class LoginControllerTest {
+class LoginControllerTest {
 
     @LocalServerPort
     private int port;
 
     @Test
-    public void test_showLoginPage() {
+    void test_showLoginPage() {
         RestTemplate restTemplate = new RestTemplate();
         String url = "http://localhost:" + port + "/Login";
 

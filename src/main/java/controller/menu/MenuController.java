@@ -9,11 +9,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 import service.cart.CartService;
-import service.cart.CartServiceImpl;
 import service.customer.CustomerService;
-import service.customer.CustomerServiceImpl;
 import service.orders.OrdersService;
-import service.orders.OrdersServiceImpl;
 
 import jakarta.servlet.http.HttpSession;
 

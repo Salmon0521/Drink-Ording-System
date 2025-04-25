@@ -10,7 +10,7 @@ import util.DatabaseUtil;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @SpringBootTest(classes = DrinkShopApplication.class)
-public class CartDAOImplTest {
+class CartDAOImplTest {
 
     @Autowired
     private CartDAO cartDAO;
@@ -21,13 +21,13 @@ public class CartDAOImplTest {
     }
 
     @Test
-    public void test_insertProduct() {
+    void test_insertProduct() {
         cartDAO.insert(1,1,3);
         assertEquals(3, cartDAO.productExist(1,1).intValue());
     }
 
     @Test
-    public void test_deleteProduct() {
+    void test_deleteProduct() {
         cartDAO.insert(1,1,3);
         assertEquals(3, cartDAO.productExist(1,1).intValue());
         cartDAO.deleteProduct(1,1);
@@ -35,7 +35,7 @@ public class CartDAOImplTest {
     }
 
     @Test
-    public void test_updateQuantity() {
+    void test_updateQuantity() {
         cartDAO.insert(1,1,3);
         assertEquals(3, cartDAO.productExist(1,1).intValue());
         cartDAO.updateQuantity(1,1,5);

@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 import service.product.ProductService;
-import service.product.ProductServiceImpl;
 
 import java.util.List;
 
@@ -21,15 +20,20 @@ public class ProductController {
     @Autowired
     private final ProductService productService;
 
+    private static final String ACCOUNT = "account";
+    private static final String LOGIN_PAGE = "redirect:/Login";
+    private static final String CUSTOMIZATION_PAGE = "customization/Customization";
+    private static final String PRODUCT_NAME = "ProductName";
+
     public ProductController(ProductService productService) {
         this.productService = productService;
     }
 
     @GetMapping("/Chocolate")
     public ModelAndView showCocoView(HttpSession session) {
-        String account = String.valueOf(session.getAttribute("account"));
+        String account = String.valueOf(session.getAttribute(ACCOUNT));
         if (account == null) {
-            return new ModelAndView("redirect:/Login");
+            return new ModelAndView(LOGIN_PAGE);
         }
 
         List<Product> chocolate = productService.showProducts("Chocolate");
@@ -44,19 +48,19 @@ public class ProductController {
     @PostMapping("/Chocolate")
     public ModelAndView handleCocoPost(@RequestParam("productName") String productName,
                                                                      HttpSession session) {
-        String account = String.valueOf(session.getAttribute("account"));
+        String account = String.valueOf(session.getAttribute(ACCOUNT));
         if (account == null) {
-            return new ModelAndView("redirect:/Login");
+            return new ModelAndView(LOGIN_PAGE);
         }
-        session.setAttribute("ProductName", productName);
-        return new ModelAndView("customization/Customization");
+        session.setAttribute(PRODUCT_NAME, productName);
+        return new ModelAndView(CUSTOMIZATION_PAGE);
     }
 
     @GetMapping("/Hand")
     public ModelAndView showHandView(HttpSession session) {
-        String account = String.valueOf(session.getAttribute("account"));
+        String account = String.valueOf(session.getAttribute(ACCOUNT));
         if (account == null) {
-            return new ModelAndView("redirect:/Login");
+            return new ModelAndView(LOGIN_PAGE);
         }
 
         List<Product> hand = productService.showProducts("Boutique hand coffee");
@@ -68,21 +72,21 @@ public class ProductController {
     @PostMapping("/Hand")
     public ModelAndView handleHandPost(@RequestParam("productName") String productName,
                                        HttpSession session) {
-        String account = String.valueOf(session.getAttribute("account"));
+        String account = String.valueOf(session.getAttribute(ACCOUNT));
         if (account == null) {
-            return new ModelAndView("redirect:/Login");
+            return new ModelAndView(LOGIN_PAGE);
         }
 
-        session.setAttribute("ProductName", productName);
-        return new ModelAndView("customization/Customization");
+        session.setAttribute(PRODUCT_NAME, productName);
+        return new ModelAndView(CUSTOMIZATION_PAGE);
     }
 
     @GetMapping("/Latte")
     public ModelAndView showLatteView(HttpSession session) {
-        String account = String.valueOf(session.getAttribute("account"));
+        String account = String.valueOf(session.getAttribute(ACCOUNT));
 
         if (account == null) {
-            return new ModelAndView("redirect:/Login");
+            return new ModelAndView(LOGIN_PAGE);
         }
 
         List<Product> latte = productService.showProducts("Latte");
@@ -94,22 +98,22 @@ public class ProductController {
     @PostMapping("/Latte")
     public ModelAndView handleLattePost(@RequestParam("productName") String productName,
                                         HttpSession session) {
-        String account = String.valueOf(session.getAttribute("account"));
+        String account = String.valueOf(session.getAttribute(ACCOUNT));
 
         if (account == null) {
-            return new ModelAndView("redirect:/Login");
+            return new ModelAndView(LOGIN_PAGE);
         }
 
-        session.setAttribute("ProductName", productName);
-        return new ModelAndView("customization/Customization");
+        session.setAttribute(PRODUCT_NAME, productName);
+        return new ModelAndView(CUSTOMIZATION_PAGE);
     }
 
     @GetMapping("/Tea")
     public ModelAndView showTeaView(HttpSession session) {
-        String account = String.valueOf(session.getAttribute("account"));
+        String account = String.valueOf(session.getAttribute(ACCOUNT));
 
         if (account == null) {
-            return new ModelAndView("redirect:/Login");
+            return new ModelAndView(LOGIN_PAGE);
         }
 
         List<Product> tea = productService.showProducts("Tea");
@@ -121,22 +125,22 @@ public class ProductController {
     @PostMapping("/Tea")
     public ModelAndView handleTeaPost(@RequestParam("productName") String productName,
                                        HttpSession session) {
-        String account = String.valueOf(session.getAttribute("account"));
+        String account = String.valueOf(session.getAttribute(ACCOUNT));
 
         if (account == null) {
-            return new ModelAndView("redirect:/Login");
+            return new ModelAndView(LOGIN_PAGE);
         }
 
-        session.setAttribute("ProductName", productName);
-        return new ModelAndView("customization/Customization");
+        session.setAttribute(PRODUCT_NAME, productName);
+        return new ModelAndView(CUSTOMIZATION_PAGE);
     }
 
     @GetMapping("/Milk")
     public ModelAndView showMilkView(HttpSession session) {
-        String account = String.valueOf(session.getAttribute("account"));
+        String account = String.valueOf(session.getAttribute(ACCOUNT));
 
         if (account == null) {
-            return new ModelAndView("redirect:/Login");
+            return new ModelAndView(LOGIN_PAGE);
         }
 
         List<Product> milk = productService.showProducts("Milk");
@@ -148,20 +152,20 @@ public class ProductController {
     @PostMapping("/Milk")
     public ModelAndView handleMilkPost(@RequestParam("productName") String productName,
                                         HttpSession session) {
-        String account = String.valueOf(session.getAttribute("account"));
+        String account = String.valueOf(session.getAttribute(ACCOUNT));
         if (account == null) {
-            return new ModelAndView("redirect:/Login");
+            return new ModelAndView(LOGIN_PAGE);
         }
 
-        session.setAttribute("ProductName", productName);
-        return new ModelAndView("customization/Customization");
+        session.setAttribute(PRODUCT_NAME, productName);
+        return new ModelAndView(CUSTOMIZATION_PAGE);
     }
 
     @GetMapping("/Coffee")
     public ModelAndView showRoastedView(HttpSession session) {
-        String account = String.valueOf(session.getAttribute("account"));
+        String account = String.valueOf(session.getAttribute(ACCOUNT));
         if (account == null) {
-            return new ModelAndView("redirect:/Login");
+            return new ModelAndView(LOGIN_PAGE);
         }
 
         List<Product> coffee = productService.showProducts("Coffee");
@@ -173,12 +177,12 @@ public class ProductController {
     @PostMapping("/Coffee")
     public ModelAndView handleRoastedPost(@RequestParam("productName") String productName,
                                           HttpSession session) {
-        String account = String.valueOf(session.getAttribute("account"));
+        String account = String.valueOf(session.getAttribute(ACCOUNT));
         if (account == null) {
-            return new ModelAndView("redirect:/Login");
+            return new ModelAndView(LOGIN_PAGE);
         }
 
-        session.setAttribute("ProductName", productName);
-        return new ModelAndView("customization/Customization");
+        session.setAttribute(PRODUCT_NAME, productName);
+        return new ModelAndView(CUSTOMIZATION_PAGE);
     }
 }

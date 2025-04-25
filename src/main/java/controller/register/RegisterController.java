@@ -33,7 +33,7 @@ public class RegisterController {
         String hashRegisteredPassword = BCrypt.hashpw(registeredPassword, BCrypt.gensalt());
         User user = new User(registeredAccount, hashRegisteredPassword, registeredPhone);
 
-        if (customerService.register(user)){
+        if (Boolean.TRUE.equals(customerService.register(user))) {
             return "0";
         }
         else {

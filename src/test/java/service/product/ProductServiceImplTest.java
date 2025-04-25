@@ -13,7 +13,7 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @SpringBootTest(classes = DrinkShopApplication.class)
-public class ProductServiceImplTest {
+class ProductServiceImplTest {
 
     @Autowired
     private ProductService productService;
@@ -24,7 +24,7 @@ public class ProductServiceImplTest {
     }
 
     @Test
-    public void test_showProducts() {
+    void test_showProducts() {
         List<Product> productList = productService.showProducts("Boutique hand coffee");
         assertEquals(7, productList.size());
         productList = productService.showProducts("Chocolate");

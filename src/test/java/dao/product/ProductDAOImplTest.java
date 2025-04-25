@@ -13,7 +13,7 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @SpringBootTest(classes = DrinkShopApplication.class)
-public class ProductDAOImplTest {
+class ProductDAOImplTest {
 
     @Autowired
     private ProductDAO productDAO;
@@ -24,7 +24,7 @@ public class ProductDAOImplTest {
     }
 
     @Test
-    public void test_getProductsByType() {
+    void test_getProductsByType() {
         List<Product> productList = productDAO.getProductsByType("Boutique hand coffee");
         assertEquals(7, productList.size());
         productList = productDAO.getProductsByType("Chocolate");
@@ -40,7 +40,7 @@ public class ProductDAOImplTest {
     }
 
     @Test
-    public void test_getProductID() {
+    void test_getProductID() {
         Product product = new Product();
         product.setName("耶加雪非");
         product.setIce("熱");

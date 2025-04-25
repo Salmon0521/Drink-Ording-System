@@ -13,7 +13,7 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @SpringBootTest(classes = DrinkShopApplication.class)
-public class OrderDAOImplTest {
+class OrderDAOImplTest {
 
     @Autowired
     private OrdersDAO ordersDAO;
@@ -24,7 +24,7 @@ public class OrderDAOImplTest {
     }
 
     @Test
-    public void test_getOrders() {
+    void test_getOrders() {
         List<Order> orders = ordersDAO.getOrders(1);
         assertEquals(0, orders.size());
     }

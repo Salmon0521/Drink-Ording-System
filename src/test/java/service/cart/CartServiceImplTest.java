@@ -1,10 +1,6 @@
 package service.cart;
 
 import bean.product.Product;
-import dao.build.BuildDAOImpl;
-import dao.cart.CartDAOImpl;
-import dao.product.ProductDAOImpl;
-import dao.user.UserDAOImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +14,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 
 @SpringBootTest(classes = DrinkShopApplication.class)
-public class CartServiceImplTest {
+class CartServiceImplTest {
 
     @Autowired
     private CartService cartService;
@@ -29,13 +25,13 @@ public class CartServiceImplTest {
     }
 
     @Test
-    public void test_showCartIsNull() {
+    void test_showCartIsNull() {
         List<Product> userCart = cartService.showCart("test", "0123456789");
         assertTrue(userCart.isEmpty());
     }
 
     @Test
-    public void test_addProductIntoCart() {
+    void test_addProductIntoCart() {
         Product product = new Product();
         product.setName("耶加雪非");
         product.setSize("M");
@@ -58,7 +54,7 @@ public class CartServiceImplTest {
     }
 
     @Test
-    public void test_deleteProductInCart() {
+    void test_deleteProductInCart() {
         Product product = new Product();
         product.setName("耶加雪非");
         product.setSize("M");

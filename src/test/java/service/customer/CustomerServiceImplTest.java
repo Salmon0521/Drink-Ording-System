@@ -1,8 +1,6 @@
 package service.customer;
 
 import bean.user.User;
-import dao.build.BuildDAOImpl;
-import dao.orders.OrdersDAOImpl;
 import dao.user.UserDAOImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -16,7 +14,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 
 @SpringBootTest(classes = DrinkShopApplication.class)
-public class CustomerServiceImplTest {
+class CustomerServiceImplTest {
 
     @Autowired
     private CustomerService customerService;
@@ -30,34 +28,34 @@ public class CustomerServiceImplTest {
     }
 
     @Test
-    public void test_registerUserSuccessful() {
+    void test_registerUserSuccessful() {
         assertFalse(userDAO.checkRegistration("test", "0912345678"));
         User user = new User("test", BCrypt.hashpw("123456", BCrypt.gensalt()), "0912345678");
         assertTrue(customerService.register(user));
     }
 
     @Test
-    public void test_registerUserFailure() {
+    void test_registerUserFailure() {
         assertTrue(userDAO.checkRegistration("test", "0123456789"));
         User user = new User("test", BCrypt.hashpw("123456", BCrypt.gensalt()), "0123456789");
         assertFalse(customerService.register(user));
     }
 
     @Test
-    public void test_loginSuccessful() {
+    void test_loginSuccessful() {
         User user = customerService.login("test", "test");
         assertEquals("0123456789", user.getPhone());
         assertEquals("普通會員", user.getLevel());
     }
 
     @Test
-    public void test_loginFailure() {
+    void test_loginFailure() {
         User user = customerService.login("test", "123");
         assertNull(user);
     }
 
     @Test
-    public void test_updateLevel() {
+    void test_updateLevel() {
         User user = customerService.login("test", "test");
         assertEquals("0123456789", user.getPhone());
         assertEquals("普通會員", user.getLevel());
